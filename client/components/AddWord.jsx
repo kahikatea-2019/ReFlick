@@ -21,3 +21,4 @@ const AddWord = (props) => (
 )
 
 export default connect()(AddWord)
+   
