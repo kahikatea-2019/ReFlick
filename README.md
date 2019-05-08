@@ -1,4 +1,4 @@
-# Re-Flick
+# ReFlick
 An homage & modern remaster of the original open-source flick game, built using React-Redux
 
 **Original:** https://www.flickgame.org/
