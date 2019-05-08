@@ -1,6 +1,9 @@
 import React from 'react'
 
 class Canvas extends React.Component {
+  state = {
+    mouseDown: false
+  }
   componentDidMount () {
     this.initCanvas()
   }
@@ -38,12 +41,10 @@ class Canvas extends React.Component {
   drawCanvas (imageData) {
     const context = this.refs.canvas.getContext('2d')
     context.putImageData(imageData, 0, 0)
-    console.log('canvas drawn!', imageData)
   }
 
   setPixel (imageData, x, y, r = 0, g = 255, b = 0, a = 255) {
     const i = (x + y * imageData.width) * 4
-    console.log('index', i)
     imageData.data[i + 0] = r
     imageData.data[i + 1] = g
     imageData.data[i + 2] = b
@@ -69,9 +70,23 @@ class Canvas extends React.Component {
     this.initCanvas()
   }
 
-  pixelClickHandler = e => {
-    const { offsetX: x, offsetY: y } = e.nativeEvent
-    this.updateCanvas(x, y)
+  mouseDownHandler = e => {
+    this.setState({
+      mouseDown: true
+    })
+  }
+
+  mouseMoveHandler = e => {
+    if (this.state.mouseDown) {
+      const { offsetX: x, offsetY: y } = e.nativeEvent
+      this.updateCanvas(x, y)
+    }
+  }
+
+  mouseUpHandler = e => {
+    this.setState({
+      mouseDown: false
+    })
   }
 
   render () {
@@ -81,7 +96,9 @@ class Canvas extends React.Component {
           ref="canvas"
           width={500}
           height={500}
-          onClick={this.pixelClickHandler}/>
+          onMouseDown={this.mouseDownHandler}
+          onMouseMove={this.mouseMoveHandler}
+          onMouseUp={this.mouseUpHandler}/>
         <button
           onClick={this.clickHandler}>
           Clickme
