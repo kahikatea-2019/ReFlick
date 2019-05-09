@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../server/db')
+const db = require('../db/games')
 
 // retrieve saved game
 
@@ -19,3 +19,5 @@ router.post('/api/v1/games', (req, res) => {
     .then(() => res.send('/game'))
     .catch(err => res.status(500).send(err.message))
 })
+
+module.exports = router
