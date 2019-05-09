@@ -2,8 +2,9 @@ import React from 'react'
 import Colours from '../../../client/components/Colours'
 import * as enzyme from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
+import Provider from 'react-redux'
 
-Colours.prototype.componentDidMount = () => {}
-test('Test runner is working', () => {
-  expect(true).toBeTruthy()
+test('<Colours/>', () => {
+  const wrapper = shallow(<Colours />)
+  expect(wrapper.find('h2').text()).toBe('  Colours  ')
 })
