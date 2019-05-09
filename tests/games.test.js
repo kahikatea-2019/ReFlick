@@ -3,12 +3,15 @@ const request = require('supertest')
 const server = require('../server/server')
 const db = require('../server/db/games')
 
-jest.mock('../server/db/games')
 
-beforeEach(() => {
-  db.reset()
-  jest.resetModules()
-})
+
+// jest.mock('../server/db/games')
+
+// beforeEach(() => {
+//   db.reset()
+//   jest.resetModules()
+// })
+
 
 test('GET /games returns single game as JSON', () => {
   return request(server)

@@ -2,7 +2,7 @@ const environment = process.env.NODE_ENV || 'development'
 const config = require('../../knexfile')[environment]
 const connection = require('knex')(config)
 
-module.export = {
+module.exports = {
   getGame,
   submitGame
 }
@@ -20,4 +20,6 @@ function getGame (id, db = connection) {
 
 function submitGame (frame1Img, frame1Map, frame2Img, frame2Map, frame3Img, frame3Map, frame4Img, frame4Map, db = connection) {
   return db('games')
-    .insert({ frame1Img, frame1Map, f 
+    .insert({ frame1Img, frame1Map, frame2Img, frame2Map, frame3Img, frame3Map, frame4Img, frame4Map })
+}
+
