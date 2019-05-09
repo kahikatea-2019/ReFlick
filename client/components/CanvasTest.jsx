@@ -89,6 +89,11 @@ class Canvas extends React.Component {
     return imageData
   }
 
+  saveFrameImg = () => {
+    const imageData = this.state.context.getImageData(0, 0, 500, 500)
+    console.log(imageData.data)
+  }
+
   reset = e => {
     this.initCanvas()
   }
@@ -127,6 +132,10 @@ class Canvas extends React.Component {
         <button
           onClick={this.reset}>
             Reset
+        </button>
+        <button
+          onClick={this.saveFrameImg}>
+            Save
         </button>
       </div>
     )
