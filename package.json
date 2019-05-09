@@ -20,6 +20,11 @@
       "@babel/plugin-proposal-object-rest-spread"
     ]
   },
+  "jest": {
+    "setupFiles": [
+      "./tests/setup.js"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
