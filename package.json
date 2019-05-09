@@ -5,7 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "start": "webpack && node server",
-    "dev": "nodemon --watch server & webpack --watch"
+    "dev": "nodemon --watch server & webpack --watch",
+    "test": "jest --watchAll"
   },
   "author": "EDA",
   "license": "ISC",
@@ -19,6 +20,11 @@
       "@babel/plugin-proposal-object-rest-spread"
     ]
   },
+  "jest": {
+    "setupFiles": [
+      "./tests/setup.js"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
@@ -26,6 +32,9 @@
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "jest": "^24.8.0",
     "nodemon": "^1.18.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -41,6 +50,5 @@
     "react-bootstrap": "^1.0.0-beta.8",
     "knex": "^0.16.5",
     "sqlite3": "^4.0.7"
-
   }
 }
