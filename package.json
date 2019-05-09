@@ -5,7 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "start": "webpack && node server",
-    "dev": "nodemon --watch server & webpack --watch"
+    "dev": "nodemon --watch server & webpack --watch",
+    "test": "jest --watchAll"
   },
   "author": "EDA",
   "license": "ISC",
@@ -37,10 +38,12 @@
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "express": "^4.16.4",
-    "react-bootstrap": "^1.0.0-beta.8",
+    "jest": "^24.8.0",
     "knex": "^0.16.5",
+    "react-bootstrap": "^1.0.0-beta.8",
     "sqlite3": "^4.0.7"
-
   }
 }
