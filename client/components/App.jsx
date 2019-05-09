@@ -1,13 +1,23 @@
 import React from 'react'
+import { Container, Col, Row } from 'react-bootstrap'
+import Canvas from './Canvas'
+import Colours from './Colours'
+import Header from './Header'
+import Footer from './Footer'
+import Frames from './Frames'
 
-import Words from './Words'
-import AddWord from './AddWord'
-
-const App = () => (
-  <div className='app-container'>
-    <Words />
-    <AddWord />
-  </div>
-)
-
-export default App
+export default function App () {
+  return (
+    <>
+      <Container>
+        <Row><Header/></Row>
+        <Row>
+          <Col ><Colours/></Col>
+          <Col xs={8}><Canvas/></Col>
+          <Col ><Frames/></Col>
+        </Row>
+        <Row><Footer/></Row>
+      </Container>
+    </>
+  )
+}
