@@ -3,7 +3,14 @@ import React from 'react'
 class Canvas extends React.Component {
   state = {
     mouseDown: false,
-    context: null
+    context: null,
+    brushSize: 10,
+    brushColour: {
+      r: 0,
+      g: 255,
+      b: 0,
+      a: 255
+    }
   }
 
   componentDidMount () {
@@ -25,7 +32,7 @@ class Canvas extends React.Component {
 
   updateCanvas = (x, y) => {
     const imageData = this.state.context.getImageData(0, 0, 500, 500)
-    const updatedImageData = this.paintPixels(imageData, x, y, 10)
+    const updatedImageData = this.paintPixels(imageData, x, y)
     this.state.context.putImageData(updatedImageData, 0, 0)
   }
 
@@ -42,15 +49,17 @@ class Canvas extends React.Component {
   }
 
   // Changes colour for a square of size x size pixels
-  paintPixels (imageData, x, y, size, r = 0, g = 255, b = 0, a = 255) {
+  paintPixels (imageData, x, y) {
+    const { brushSize } = this.state
+    const { r, g, b, a } = this.state.brushColour
     const { width, data } = imageData
     const centreIndex = (x + y * width) * 4
-    const topLeft = centreIndex - (size / 2 * 4)
+    const topLeft = centreIndex - (brushSize / 2 * 4)
 
     const pixelsToPaint = []
-    for (let i = 0; i < size; i++) {
+    for (let i = 0; i < brushSize; i++) {
       const top = (topLeft + 4 * i)
-      for (let j = 0; j < size; j++) {
+      for (let j = 0; j < brushSize; j++) {
         pixelsToPaint.push(top - (width * 4 * j))
       }
     }
