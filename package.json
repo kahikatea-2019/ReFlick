@@ -5,7 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "start": "webpack && node server",
-    "dev": "nodemon --watch server & webpack --watch"
+    "dev": "nodemon --watch server & webpack --watch",
+    "test": "jest --watchAll"
   },
   "author": "EDA",
   "license": "ISC",
