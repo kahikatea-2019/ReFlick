@@ -20,5 +20,4 @@ function getGame (id, db = connection) {
 
 function submitGame (frame1Img, frame1Map, frame2Img, frame2Map, frame3Img, frame3Map, frame4Img, frame4Map, db = connection) {
   return db('games')
-    .insert({ frame1Img, frame1Map, frame2Img, frame2Map, frame3Img, frame3Map, frame4Img, frame4Map })
-}
+    .insert({ frame1Img, frame1Map, f 
