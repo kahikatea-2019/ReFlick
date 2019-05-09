@@ -1,9 +1,15 @@
-let nextWordId = 0
+export const GET_COLOURS = 'GET_COLOURS'
+export const GET_FRAMES = 'GET_FRAMES'
 
-export const addWord = (word) => {
+export const getColours = (colours) => {
   return {
-    type: 'ADD_WORD',
-    id: nextWordId++,
-    word
+    type: GET_COLOURS,
+    colours
+  }
+}
+export const getFrames = (colours) => {
+  return {
+    type: GET_FRAMES,
+    frames
   }
 }
