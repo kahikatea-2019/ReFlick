@@ -13,6 +13,7 @@ function getGame (id, db = connection) {
   return db('games')
     .where({ id: id })
     .select()
+    .first()
 }
 
 // export button to submit to db once user has built game
