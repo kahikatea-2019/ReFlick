@@ -10,6 +10,14 @@ button {
   height: 2rem;
   border-radius: 50%;
 }
-* {
-  border: .2px solid black 
+.left {
+  border: .2px solid black
+}
+
+.right {
+  border: .2px solid black
+}
+.canvas {
+  padding: 50px;
+  border: .2px solid black;
 }

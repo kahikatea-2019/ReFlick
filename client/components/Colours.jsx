@@ -3,20 +3,20 @@ import { connect } from 'react-redux'
 import Colour from './Colour'
 
 class Colours extends React.Component {
-  renderColour (colours) {
+  renderColour (colours, frames) {
     return (
       colours.map(colour =>
-        <Colour key={colour} colour={colour} />
+        <Colour key={colour} colour={colour} frames={frames} />
       )
     )
   }
 
   render () {
-    const { colours } = this.props
+    const { colours, frames } = this.props
     return (
       <div className = "left">
         <h2> Colours </h2>
-        {this.renderColour(colours)}
+        {this.renderColour(colours, frames)}
       </div>
     )
   }
@@ -24,7 +24,8 @@ class Colours extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    colours: state.coloursReducer.colours
+    colours: state.coloursReducer.colours,
+    frames: state.framesReducer.frames
   }
 }
 

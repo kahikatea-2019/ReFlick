@@ -12,9 +12,9 @@ export default function App () {
       <Container>
         <Row><Header/></Row>
         <Row>
-          <Col sm><Colours/></Col>
-          <Col xl><Canvas/></Col>
-          <Col sm><Frames/></Col>
+          <Col ><Colours/></Col>
+          <Col xs={8}><Canvas/></Col>
+          <Col ><Frames/></Col>
         </Row>
         <Row><Footer/></Row>
       </Container>
