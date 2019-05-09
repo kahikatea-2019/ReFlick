@@ -16,8 +16,3 @@ test('<App> root has className of app', () => {
   expect(root.length).toBe(1)
 })
 
-test('page header includes fruit', () => {
-  const wrapper = render(<App />)
-  const h1 = wrapper.find('h1')
-  expect(h1.text()).toMatch(/Fruit/)
-})
