@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import Colour from './Colour'
 
 class Colours extends React.Component {
@@ -12,7 +12,7 @@ class Colours extends React.Component {
   }
 
   render () {
-    const { colours, frames } = this.props
+    const {colours, frames} = this.props
     return (
       <div className = "left">
         <h2> Colours </h2>
