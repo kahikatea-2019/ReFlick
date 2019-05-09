@@ -91,7 +91,24 @@ class Canvas extends React.Component {
 
   saveFrameImg = () => {
     const imageData = this.state.context.getImageData(0, 0, 500, 500)
-    console.log(imageData.data)
+    console.log('initial', imageData.data)
+
+    // create blob
+    const blob = new Blob([imageData.data.buffer])
+
+    const fileReader = new FileReader()
+    // convert blob data back into arraybuffer
+    fileReader.onload = e => {
+      const blobArrayBuffer = event.target.result
+      const blobArray = new Uint8ClampedArray(blobArrayBuffer)
+      const blobImageData = new ImageData(blobArray, 500, 500)
+
+      // draw to other canvas
+      const context = this.refs.canvas2.getContext('2d')
+      context.putImageData(blobImageData, 0, 0)
+    }
+    // read blob
+    fileReader.readAsArrayBuffer(blob)
   }
 
   reset = e => {
@@ -137,6 +154,10 @@ class Canvas extends React.Component {
           onClick={this.saveFrameImg}>
             Save
         </button>
+        <canvas
+          ref="canvas2"
+          width={500}
+          height={500}/>
       </div>
     )
   }
