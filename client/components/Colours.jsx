@@ -6,7 +6,7 @@ class Colours extends React.Component {
   renderColour (colours, frames) {
     return (
       colours.map(colour =>
-        <Colour key={colour} colour={colour} frames={frames} />
+        <Colour key={`rgb(${colour.r},${colour.g},${colour.b})`} colour={colour} frames={frames} />
       )
     )
   }
