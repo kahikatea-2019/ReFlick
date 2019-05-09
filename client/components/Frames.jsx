@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Frame from './Frame'
 
 class Frames extends React.Component {
-  renderColour (frames) {
+  renderFrames (frames) {
     return (
       frames.map(frame =>
         <Frame key={frame.id} frame={frame.name} />
@@ -16,7 +16,7 @@ class Frames extends React.Component {
     return (
       <div className = "right">
         <h2> Frames </h2>
-        {this.renderColour(frames)}
+        {this.renderFrames(frames)}
       </div>
     )
   }
