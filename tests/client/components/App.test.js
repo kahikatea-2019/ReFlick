@@ -1,14 +1,23 @@
 import React from 'react'
-import App from '../../../client/components/App'
-import * as enzyme from 'enzyme'
-import * as Adapter from 'enzyme-adapter-react-16'
+import { shallow, render, mount } from 'enzyme'
 
+import App from '../../../client/components/App'
+
+// Prevent <App> from calling the API
 App.prototype.componentDidMount = () => {}
-test('Test runner is working', () => {
+
+test('test runner is working', () => {
   expect(true).toBeTruthy()
 })
 
-test('<App />', () => {
-  const wrapper = enzyme.shallow(<App />)
-  expect(wrapper.find('h1').length).toBe(1)
+test('<App> root has className of app', () => {
+  const wrapper = shallow(<App />)
+  const root = wrapper.find('.app')
+  expect(root.length).toBe(1)
+})
+
+test('page header includes fruit', () => {
+  const wrapper = render(<App />)
+  const h1 = wrapper.find('h1')
+  expect(h1.text()).toMatch(/Fruit/)
 })
