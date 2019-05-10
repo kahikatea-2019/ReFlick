@@ -14,11 +14,14 @@ export function getGamesData (id) {
 }
 
 export function submitGame (game) {
-  request
+  const formData = new FormData()
+  formData.append('blob', blob)
+  return request
     .post('/api/v1/games')
-    .send(game)
+    .send(formData)
     .catch(err => {
       // eslint-disable-next-line no-console
       console.error(err)
     })
 }
+

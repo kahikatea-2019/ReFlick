@@ -2,6 +2,8 @@ const path = require('path')
 const express = require('express')
 const formidableMiddleware = require('express-formidable')
 
+const fs = require('fs')
+
 const db = require('./db/games')
 
 const server = express()
@@ -20,8 +22,21 @@ server.use(express.static('public'))
 server.post('/testRoute', (req, res) => {
   console.log(req.fields)
   console.log(req.files)
-  db.submitGame(req.files.blob)
-    .then(() => {})
+  fs.readFile(req.files.frame1Img.path, (err, data) => {
+    if (err) { console.log(err) }
+    console.log('data', data)
+    db.submitGame(data)
+    .then(() => {res.send('ok')})
+    .catch(err => res.status(500).send(err.message))
+  })
+})
+
+server.get('/testRoute/:id', (req, res) => {
+  const id = req.params.id
+  db.getGame(id)
+    .then((game) => {
+      res.send(game)
+    })
     .catch(err => res.status(500).send(err.message))
 })
 //
