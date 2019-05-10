@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { saveGame, getGame } from '../../api'
+import { submitGame, getGameData } from '../../api/games'
 
 class Canvas extends React.Component {
   state = {
@@ -70,9 +70,9 @@ class Canvas extends React.Component {
   saveFrameImg = () => {
     const imageData = this.state.context.getImageData(0, 0, 500, 500)
     const frame1Img = new Blob([imageData.data.buffer])
-    saveGame({ frame1Img })
+    submitGame({ frame1Img })
       .then(() => {
-        return getGame(3)
+        return getGameData(30)
           .then(game => {
             const returnedArray = Uint8ClampedArray.from(game.frame1Img.data)
             const returnedImageData = new ImageData(returnedArray, 500, 500)
@@ -107,7 +107,7 @@ class Canvas extends React.Component {
     }
   }
 
-  render() {
+  render () {
     return (
       <div>
         <canvas

@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-export function getGamesData (id) {
+export function getGameData (id) {
   return request
     .get(`/api/v1/games/${id}`)
     .then(res => {
@@ -14,8 +14,9 @@ export function getGamesData (id) {
 }
 
 export function submitGame (game) {
+  const { frame1Img } = game
   const formData = new FormData()
-  formData.append('blob', blob)
+  formData.append('frame1Img', frame1Img)
   return request
     .post('/api/v1/games')
     .send(formData)
@@ -24,4 +25,3 @@ export function submitGame (game) {
       console.error(err)
     })
 }
-
