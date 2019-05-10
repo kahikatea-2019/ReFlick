@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Frames is running Renders correct 1`] = `ShallowWrapper {}`;
