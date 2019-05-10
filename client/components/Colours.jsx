@@ -13,7 +13,7 @@ class Colours extends React.Component {
   }
 
   componentDidMount () {
-    return getGamesData
+    return getGamesData(1)
   }
   render () {
     const { colours, frames } = this.props

@@ -1,11 +1,24 @@
 import request from 'superagent'
 
-const gameUrl = '/api/v1/games'
-
-export function getGamesData () {
+export function getGamesData (id) {
   return request
-    .get(gameUrl)
+    .get(`/api/v1/games/${id}`)
     .then(res => {
-      console.log(res)
+      const game = res.body
+      return game
+    })
+    .catch(err => {
+      // eslint-disable-next-line no-console
+      console.error(err)
+    })
+}
+
+export function submitGame (game) {
+  request
+    .post('/api/v1/games')
+    .send(game)
+    .catch(err => {
+      // eslint-disable-next-line no-console
+      console.error(err)
     })
 }
