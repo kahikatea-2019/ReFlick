@@ -1,9 +1,15 @@
 import React from 'react'
+import { shallow } from 'enzyme'
 import Colour from '../../../client/components/Colour'
-import * as enzyme from 'enzyme'
-import * as Adapter from 'enzyme-adapter-react-16'
 
 Colour.prototype.componentDidMount = () => {}
-test('Test runner is working', () => {
+test('test runner is working', () => {
   expect(true).toBeTruthy()
 })
+
+// describe('Colour', () => {
+//   it('Colour should render correctly in "debug" mode', () => {
+//     const component = shallow(<Colour debug />)
+//     expect(component).toMatchSnapshot()
+//   })
+// })

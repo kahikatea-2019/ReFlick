@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow, render, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import App from '../../../client/components/App'
 
@@ -15,3 +15,15 @@ test('test runner is working', () => {
 //   const root = wrapper.find('.app')
 //   expect(root.length).toBe(1)
 // })
+
+App.prototype.componentDidMount = () => {}
+test('test runner is working', () => {
+  expect(true).toBeTruthy()
+})
+
+describe('App', () => {
+  it('App should render correctly in "debug" mode', () => {
+    const component = shallow(<App debug />)
+    expect(component).toMatchSnapshot()
+  })
+})
