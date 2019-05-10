@@ -1,6 +1,7 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import Colour from './Colour'
+import { getGamesData } from '../api/games'
 
 class Colours extends React.Component {
   renderColour (colours, frames) {
@@ -11,8 +12,11 @@ class Colours extends React.Component {
     )
   }
 
+  componentDidMount () {
+    return getGamesData
+  }
   render () {
-    const {colours, frames} = this.props
+    const { colours, frames } = this.props
     return (
       <div className = "left">
         <h2> Colours </h2>

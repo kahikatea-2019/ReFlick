@@ -1,7 +1,8 @@
 import React from 'react'
-import {Dropdown} from 'react-bootstrap'
+import { Dropdown } from 'react-bootstrap'
 import CustomToggle from './CustomToggle'
 import CustomMenu from './CustomMenu'
+
 
 export default class Colour extends React.Component {
   returnDropdowns (colour, frames) {
@@ -9,6 +10,8 @@ export default class Colour extends React.Component {
       return <Dropdown.Item onClick={() => console.log('Colour:', colour + '\n' + 'Frame:', frame.id)} key={frame.id + colour}>{frame.name}</Dropdown.Item>
     })
   }
+
+
 
   render () {
     const colour = this.props.colour
@@ -18,7 +21,7 @@ export default class Colour extends React.Component {
       <React.Fragment>
         <Dropdown>
           <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-            <div className='colour' style={{width: 30, height: 30, backgroundColor: colour}}/>
+            <div className='colour' style={{ width: 30, height: 30, backgroundColor: colour }}/>
           </Dropdown.Toggle>
           <Dropdown.Menu >
             {this.returnDropdowns(colour, frames)}

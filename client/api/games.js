@@ -6,6 +6,6 @@ export function getGamesData () {
   return request
     .get(gameUrl)
     .then(res => {
-      return res
+      console.log(res)
     })
 }

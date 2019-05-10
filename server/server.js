@@ -13,7 +13,7 @@ server.use(express.urlencoded({ extended: true }))
 server.use(express.static('public'))
 
 server.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'))
+  res.sendFile(path.join(__dirname, '../public/index.html'))
 })
 
 module.exports = server
