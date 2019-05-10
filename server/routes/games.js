@@ -7,8 +7,9 @@ const db = require('../db/games')
 router.get('/api/v1/:id', (req, res) => {
   const id = Number(req.params.id)
   db.getGame(id)
-    .then(game => {res.json(game)})
-    .catch(err => {res.status(500).send(err.message)
+    .then(game => { res.json(game) })
+    .catch(err => {
+      res.status(500).send(err.message)
     })
 })
 
