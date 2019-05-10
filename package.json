@@ -40,15 +40,21 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.2",
     "redux": "^4.0.1",
+    "supertest": "^4.0.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "cheerio": "^1.0.0-rc.3",
+    "enzyme-adapter-react-16": "^1.12.1",
     "express": "^4.16.4",
-    "react-bootstrap": "^1.0.0-beta.8",
     "knex": "^0.16.5",
-    "sqlite3": "^4.0.7"
+    "nock": "^10.0.6",
+    "react-bootstrap": "^1.0.0-beta.8",
+    "redux-mock-store": "^1.5.3",
+    "sqlite3": "^4.0.7",
+    "superagent": "^5.0.5"
   }
 }

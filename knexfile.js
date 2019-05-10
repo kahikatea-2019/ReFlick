@@ -1,4 +1,5 @@
 // Update with your config settings.
+const path = require('path')
 
 module.exports = {
 
@@ -6,14 +7,36 @@ module.exports = {
     client: 'sqlite3',
     connection: {
       filename: './dev.sqlite3'
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: path.join(__dirname, 'server/db/migrations')
+    },
+    seeds: {
+      directory: path.join(__dirname, 'server/db/seeds')
     }
   },
+
+  test: {
+    client: 'sqlite3',
+    connection: {
+      filename: ':memory:'
+    },
+    useNullAsDefault: true
+  },
+
+  // migrations: {
+  //   directory: path.join(__dirname, 'server/db/migrations')
+  // },
+  // seeds: {
+  //   directory: path.join(__dirname, 'server/db/seeds')
+  // }
 
   staging: {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -29,7 +52,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -41,4 +64,4 @@ module.exports = {
     }
   }
 
-};
+}
