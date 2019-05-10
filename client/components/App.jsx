@@ -1,10 +1,10 @@
 import React from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
-import Canvas from './Canvas'
-import Colours from './Colours'
-import Header from './Header'
-import Footer from './Footer'
-import Frames from './Frames'
+import Canvas from './canvas/Canvas'
+import Colours from './colours/Colours'
+import Header from './page-layout/Header'
+import Footer from './page-layout/Footer'
+import Frames from './frames/Frames'
 
 export default function App () {
   return (

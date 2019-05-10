@@ -1,4 +1,4 @@
-import Frame from '../../../client/components/Frame'
+import Frame from '../../../client/components/frames/Frame'
 import { shallow } from 'enzyme'
 import React from 'react'
 
