@@ -1,16 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 class Canvas extends React.Component {
   state = {
     mouseDown: false,
     context: null,
-    brushSize: 10,
-    brushColour: {
-      r: 0,
-      g: 255,
-      b: 0,
-      a: 255
-    }
+    brushSize: this.props.brushSize,
+    brushColour: this.props.brushColour
   }
 
   componentDidMount () {
@@ -142,4 +138,11 @@ class Canvas extends React.Component {
   }
 }
 
-export default Canvas
+const mapStateToProps = state => (
+  {
+    brushColour: state.brush.colour,
+    brushSize: state.brush.size
+  }
+)
+
+export default connect(mapStateToProps)(Canvas)
