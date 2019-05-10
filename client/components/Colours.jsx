@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Colour from './Colour'
 
+import Pen from './Pen'
+
 class Colours extends React.Component {
   renderColour (colours, frames) {
     return (
@@ -17,6 +19,7 @@ class Colours extends React.Component {
       <div className = "left">
         <h2> Colours </h2>
         {this.renderColour(colours, frames)}
+        <Pen />
       </div>
     )
   }
