@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Colour from './Colour'
-import { getGamesData } from '../api/games'
+import { getGamesData } from '../../api/games'
 
 class Colours extends React.Component {
   renderColour (colours, frames) {
