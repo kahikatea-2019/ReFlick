@@ -2,6 +2,8 @@ import React from 'react'
 
 import { saveGame } from '../api'
 
+import { CanvasView } from './CanvasView'
+
 class Canvas extends React.Component {
   state = {
     mouseDown: false,
@@ -30,6 +32,7 @@ class Canvas extends React.Component {
     const updatedImageData = this.setBackground(imageData)
 
     context.putImageData(updatedImageData, 0, 0)
+    
   }
 
   updateCanvas = (x, y) => {
@@ -151,6 +154,11 @@ class Canvas extends React.Component {
           onMouseDown={this.mouseDownHandler}
           onMouseMove={this.mouseMoveHandler}
           onMouseUp={this.mouseUpHandler}/>
+          <CanvasView
+          imageData={this.props.imageData}
+          mouseDownHandler={this.mouseDownHandler}
+          mouseMoveHandler={this.mouseMoveHandler}
+          mouseUpHandler={this.mouseUpHandler}/>
         <button
           onClick={this.reset}>
             Reset
