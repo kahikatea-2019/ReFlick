@@ -1,4 +1,4 @@
-import Header from '../../../client/components/Header'
+import Header from '../../../client/components/page-layout/Header'
 import { shallow } from 'enzyme'
 import React from 'react'
 

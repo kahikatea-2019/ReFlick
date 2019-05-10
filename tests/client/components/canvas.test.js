@@ -1,5 +1,5 @@
 import React from 'react'
-import Canvas from '../../../client/components/Canvas'
+import Canvas from '../../../client/components/canvas/Canvas'
 import * as enzyme from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 

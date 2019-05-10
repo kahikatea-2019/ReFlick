@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import Colours from '../../../client/components/Colours'
+import Colours from '../../../client/components/colours/Colours'
 
 // Colours.prototype.componentDidMount = () => {}
 // test('test runner is working', () => {

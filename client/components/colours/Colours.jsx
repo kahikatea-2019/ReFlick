@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Colour from './Colour'
+import { getGamesData } from '../../api/games'
 
 import Pen from './Pen'
 
@@ -8,11 +9,14 @@ class Colours extends React.Component {
   renderColour (colours, frames) {
     return (
       colours.map(colour =>
-        <Colour key={colour} colour={colour} frames={frames} />
+        <Colour key={`rgb(${colour.r},${colour.g},${colour.b})`} colour={colour} frames={frames} />
       )
     )
   }
 
+  componentDidMount () {
+    return getGamesData(1)
+  }
   render () {
     const { colours, frames } = this.props
     return (
