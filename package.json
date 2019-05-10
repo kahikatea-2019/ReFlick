@@ -48,8 +48,9 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "express": "^4.16.4",
-    "react-bootstrap": "^1.0.0-beta.8",
     "knex": "^0.16.5",
+    "react-bootstrap": "^1.0.0-beta.8",
+    "redux-mock-store": "^1.5.3",
     "sqlite3": "^4.0.7"
   }
 }
