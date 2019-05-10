@@ -8,6 +8,7 @@ module.exports = {
     connection: {
       filename: './dev.sqlite3'
     },
+    useNullAsDefault: true,
     migrations: {
       directory: path.join(__dirname, 'server/db/migrations')
     },
@@ -24,15 +25,12 @@ module.exports = {
     useNullAsDefault: true
   },
 
-
   // migrations: {
   //   directory: path.join(__dirname, 'server/db/migrations')
   // },
   // seeds: {
   //   directory: path.join(__dirname, 'server/db/seeds')
   // }
-
-
 
   staging: {
     client: 'postgresql',
