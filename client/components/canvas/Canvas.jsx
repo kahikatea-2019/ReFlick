@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { saveGame } from '../api'
-
-import { CanvasView } from './CanvasView'
+import { saveGame, getGame } from '../../api'
 
 class Canvas extends React.Component {
   state = {
@@ -23,12 +21,8 @@ class Canvas extends React.Component {
       context
     })
     const imageData = context.createImageData(500, 500)
-
-    // const updatedImageData = this.setBackgroundRandom(imageData)
     const updatedImageData = this.setBackground(imageData)
-
     context.putImageData(updatedImageData, 0, 0)
-    
   }
 
   updateCanvas = (x, y) => {
@@ -64,55 +58,28 @@ class Canvas extends React.Component {
         pixelsToPaint.push(top - (width * 4 * j))
       }
     }
-
     pixelsToPaint.forEach(i => {
       data[i + 0] = r
       data[i + 1] = g
       data[i + 2] = b
       data[i + 3] = a
     })
-
-    return imageData
-  }
-
-  // Sets background to random pixel colours
-  setBackgroundRandom = (imageData) => {
-    function getRandomNum (min, max) {
-      return Math.random() * (max - min) + min
-    }
-    const { data } = imageData
-    for (let i = 0; i < imageData.data.length; i += 4) {
-      data[i + 0] = getRandomNum(255, 0)
-      data[i + 1] = getRandomNum(255, 0)
-      data[i + 2] = getRandomNum(255, 0)
-      data[i + 3] = getRandomNum(255, 0)
-    }
     return imageData
   }
 
   saveFrameImg = () => {
     const imageData = this.state.context.getImageData(0, 0, 500, 500)
-    console.log('initial', imageData.data)
-
-    // create blob
-    const blob = new Blob([imageData.data.buffer])
-
-    // api call
-    saveGame(blob)
-
-    const fileReader = new FileReader()
-    // convert blob data back into arraybuffer
-    fileReader.onload = e => {
-      const blobArrayBuffer = event.target.result
-      const blobArray = new Uint8ClampedArray(blobArrayBuffer)
-      const blobImageData = new ImageData(blobArray, 500, 500)
-
-      // draw to other canvas
-      const context = this.refs.canvas2.getContext('2d')
-      context.putImageData(blobImageData, 0, 0)
-    }
-    // read blob
-    fileReader.readAsArrayBuffer(blob)
+    const frame1Img = new Blob([imageData.data.buffer])
+    saveGame({ frame1Img })
+      .then(() => {
+        return getGame(3)
+          .then(game => {
+            const returnedArray = Uint8ClampedArray.from(game.frame1Img.data)
+            const returnedImageData = new ImageData(returnedArray, 500, 500)
+            const context = this.refs.canvas2.getContext('2d')
+            context.putImageData(returnedImageData, 0, 0)
+          })
+      })
   }
 
   reset = e => {
@@ -140,7 +107,7 @@ class Canvas extends React.Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <div>
         <canvas
@@ -149,24 +116,24 @@ class Canvas extends React.Component {
           height={500}
           onMouseDown={this.mouseDownHandler}
           onMouseMove={this.mouseMoveHandler}
-          onMouseUp={this.mouseUpHandler}/>
-          <CanvasView
-          imageData={this.props.imageData}
+          onMouseUp={this.mouseUpHandler} />
+        {/* <CanvasView
+          imageData={new ImageData(500, 500)}
           mouseDownHandler={this.mouseDownHandler}
           mouseMoveHandler={this.mouseMoveHandler}
-          mouseUpHandler={this.mouseUpHandler}/>
+          mouseUpHandler={this.mouseUpHandler}/> */}
         <button
           onClick={this.reset}>
-            Reset
+          Reset
         </button>
         <button
           onClick={this.saveFrameImg}>
-            Save
+          Save
         </button>
         <canvas
           ref="canvas2"
           width={500}
-          height={500}/>
+          height={500} />
       </div>
     )
   }
