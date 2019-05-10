@@ -1,2 +1,5 @@
 node_modules
 bundle*
+
+# Development databases
+dev.sqlite3

@@ -1,4 +1,4 @@
-import Footer from '../../../client/components/Footer'
+import Footer from '../../../client/components/page-layout/Footer'
 import { shallow } from 'enzyme'
 import React from 'react'
 

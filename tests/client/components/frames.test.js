@@ -1,4 +1,4 @@
-import Frames from '../../../client/components/Frames'
+import Frames from '../../../client/components/frames/Frames'
 import { shallow } from 'enzyme'
 import React from 'react'
 import { Provider } from 'react-redux'
