@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dropdown } from 'react-bootstrap'
-import CustomToggle from './CustomToggle'
-import CustomMenu from './CustomMenu'
+import CustomToggle from '../toggle-menu/CustomToggle'
+import CustomMenu from '../toggle-menu/CustomMenu'
 
 export default class Colour extends React.Component {
   state = {
