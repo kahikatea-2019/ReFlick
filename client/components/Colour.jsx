@@ -1,28 +1,28 @@
 import React from 'react'
-import {Dropdown} from 'react-bootstrap'
+import { Dropdown } from 'react-bootstrap'
 import CustomToggle from './CustomToggle'
 import CustomMenu from './CustomMenu'
 
 export default class Colour extends React.Component {
   state = {
-    activeFrame : "0"
+    activeFrame: '0'
   }
-  
+
   returnDropdowns (colour, frames) {
     return frames.map(frame => {
-      return <Dropdown.Item 
-      onClick={() => {
-        console.log('Colour:', colour + '\n' + 'Frame:', frame.id)
-        this.setState({activeFrame: frame.id.toString()})
-      }}
-      key={frame.id + colour}>{frame.name}</Dropdown.Item>
+      return <Dropdown.Item
+        onClick={() => {
+          console.log('Colour:', colour + '\n' + 'Frame:', frame.id)
+          this.setState({ activeFrame: frame.id.toString() })
+        }}
+        key={frame.id + colour}>{frame.name}</Dropdown.Item>
     })
   }
 
   createColour (colour) {
     return (
-      <div className='colour' style={{width: 40, height: 40, backgroundColor: colour}} onClick={() => prompt(colour)}> 
-        <div className='framePick' style={{width: 15, height: 15, backgroundColor: 'white'}}>{this.state.activeFrame}</div>
+      <div className='colour' style={{ width: 40, height: 40, backgroundColor: colour }} onClick={() => prompt(colour)}>
+        <div className='framePick' style={{ width: 15, height: 15, backgroundColor: 'white' }}>{this.state.activeFrame}</div>
       </div>
     )
   }
