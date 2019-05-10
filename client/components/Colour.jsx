@@ -5,7 +5,7 @@ import CustomMenu from './CustomMenu'
 
 export default class Colour extends React.Component {
   state = {
-    activeFrame : "0"
+    activeFrame : null
   }
   
   returnDropdowns (colour, frames) {

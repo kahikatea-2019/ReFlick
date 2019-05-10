@@ -10,6 +10,7 @@ button {
   height: 2rem;
   border-radius: 50%;
 }
+
 .left {
   border: .2px solid black
 }
@@ -18,11 +19,15 @@ button {
   border: .2px solid black;
   
 }
+
 .canvas {
   padding: 50px;
   border: .2px solid black;
 }
+
 .frame {
+  align-content: center;
+  cursor: pointer;
   width: 50px;
   height: 50px;
   border: .2px solid black;
