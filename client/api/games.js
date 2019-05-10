@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-export function getGamesData (id) {
+export function getGameData (id) {
   return request
     .get(`/api/v1/games/${id}`)
     .then(res => {
@@ -14,9 +14,12 @@ export function getGamesData (id) {
 }
 
 export function submitGame (game) {
-  request
+  const { frame1Img } = game
+  const formData = new FormData()
+  formData.append('frame1Img', frame1Img)
+  return request
     .post('/api/v1/games')
-    .send(game)
+    .send(formData)
     .catch(err => {
       // eslint-disable-next-line no-console
       console.error(err)
