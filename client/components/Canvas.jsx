@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { saveGame } from '../api'
+
 class Canvas extends React.Component {
   state = {
     mouseDown: false,
@@ -95,6 +97,9 @@ class Canvas extends React.Component {
 
     // create blob
     const blob = new Blob([imageData.data.buffer])
+
+    // api call
+    saveGame(blob)
 
     const fileReader = new FileReader()
     // convert blob data back into arraybuffer

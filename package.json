@@ -47,8 +47,10 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "express": "^4.16.4",
-    "react-bootstrap": "^1.0.0-beta.8",
+    "express-formidable": "^1.2.0",
     "knex": "^0.16.5",
-    "sqlite3": "^4.0.7"
+    "react-bootstrap": "^1.0.0-beta.8",
+    "sqlite3": "^4.0.7",
+    "superagent": "^5.0.5"
   }
 }
