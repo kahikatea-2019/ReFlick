@@ -1,4 +1,4 @@
-import { SET_BRUSH_COLOUR } from '../actions'
+import { SET_BRUSH_COLOUR, SET_BRUSH_SIZE } from '../actions'
 
 const initialState = {
   colour: {
@@ -17,7 +17,11 @@ function brushReducer (state = initialState, action) {
         colour: action.colour,
         size: state.size
       }
-
+    case SET_BRUSH_SIZE:
+      return {
+        colour: state.colour,
+        size: action.size
+      }
     default:
       return state
   }
