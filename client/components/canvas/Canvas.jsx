@@ -9,7 +9,11 @@ class Canvas extends React.Component {
     mouseDown: false,
     brushSize: this.props.brushSize,
     brushColour: this.props.brushColour,
-    activeFrame: this.props.activeFrame
+    activeFrame: this.props.activeFrame,
+    frame1Img: new ImageData(500, 500),
+    frame2Img: new ImageData(500, 500),
+    frame3Img: new ImageData(500, 500),
+    frame4Img: new ImageData(500, 500)
   }
 
   componentDidMount () {
@@ -30,31 +34,39 @@ class Canvas extends React.Component {
     if (prevProps.activeFrame !== this.props.activeFrame) {
       this.setState({
         activeFrame: this.props.activeFrame
-      })
+      }, this.displayActiveFrame)
     }
   }
 
-  initCanvas = () => {
+  displayActiveFrame () {
+    console.log('changing to', `frame${this.state.activeFrame}Img`)
     const context = this.refs.canvas.getContext('2d')
-    const imageData = context.createImageData(500, 500)
-    const updatedImageData = this.setBackground(imageData)
-    context.putImageData(updatedImageData, 0, 0)
+    const frameImg = this.state[`frame${this.state.activeFrame}Img`]
+    context.putImageData(frameImg, 0, 0)
+  }
 
-    const frame1Img = { ...updatedImageData }
-    const frame2Img = { ...updatedImageData }
-    const frame3Img = { ...updatedImageData }
-    const frame4Img = { ...updatedImageData }
+  initCanvas = () => {
+    this.setState({
+      frame1Img: this.setBackground(this.state.frame1Img, 255, 0, 0, 255),
+      frame2Img: this.setBackground(this.state.frame2Img, 0, 255, 0, 255),
+      frame3Img: this.setBackground(this.state.frame3Img, 0, 0, 255, 255),
+      frame4Img: this.setBackground(this.state.frame4Img, 100, 100, 0, 255)
+    }, this.displayActiveFrame)
   }
 
   updateCanvas = (x, y) => {
     const context = this.refs.canvas.getContext('2d')
     const imageData = context.getImageData(0, 0, 500, 500)
     const updatedImageData = this.paintPixels(imageData, x, y)
-    context.putImageData(updatedImageData, 0, 0)
+
+    context.putImageData(`frame${this.state.activePage}Img`, 0, 0)
+
+    // context.putImageData(updatedImageData, 0, 0)
   }
 
   // Sets background colour, default is black
   setBackground = (imageData, r = 0, g = 0, b = 0, a = 255) => {
+    // const newImageData = { ...imageData }
     const { data } = imageData
     for (let i = 0; i < imageData.data.length; i += 4) {
       data[i + 0] = r
