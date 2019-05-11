@@ -21,6 +21,8 @@
     ]
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "jest-enzyme",
+    "testEnvironment": "enzyme",
     "setupFiles": [
       "./tests/setup.js"
     ]
@@ -48,9 +50,10 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "cheerio": "^1.0.0-rc.3",
-    "enzyme-adapter-react-16": "^1.12.1",
     "express": "^4.16.4",
     "express-formidable": "^1.2.0",
+    "jest-environment-enzyme": "^7.0.2",
+    "jest-enzyme": "^7.0.2",
     "knex": "^0.16.5",
     "nock": "^10.0.6",
     "react-bootstrap": "^1.0.0-beta.8",
