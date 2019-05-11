@@ -1,19 +1,25 @@
-import { GET_FRAMES } from '../actions/index'
-const initialState = {
-  frames: [
-    { id: 1, name: 1, map: { col1: null, col2: null, col3: null, col4: null } },
-    { id: 2, name: 2, map: { col1: null, col2: null, col3: null, col4: null } },
-    { id: 3, name: 3, map: { col1: null, col2: null, col3: null, col4: null } },
-    { id: 4, name: 4, map: { col1: null, col2: null, col3: null, col4: null } }
-  ]
-}
+import { GET_FRAMES, UPDATE_FRAME_IMAGE } from '../actions/index'
+const initialFrames = [
+  { id: 1, name: 1, image: [], map: { col1: null, col2: null, col3: null, col4: null } },
+  { id: 2, name: 2, image: [], map: { col1: null, col2: null, col3: null, col4: null } },
+  { id: 3, name: 3, image: [], map: { col1: null, col2: null, col3: null, col4: null } },
+  { id: 4, name: 4, image: [], map: { col1: null, col2: null, col3: null, col4: null } }
+]
 
-function framesReducer (state = initialState, action) {
+function framesReducer (frames = initialFrames, action) {
   switch (action.type) {
     case GET_FRAMES:
-      return state
+      return frames
+    case UPDATE_FRAME_IMAGE:
+      return frames.map(frame => {
+        if (frame.id === action.frameId) {
+          frame.image = action.imageData
+        }
+        return frame
+      })
+
     default:
-      return state
+      return frames
   }
 }
 
