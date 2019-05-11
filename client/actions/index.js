@@ -10,10 +10,10 @@ export const getColours = (colours) => {
     colours
   }
 }
-export const getFrames = (colours) => {
+export const getFrames = () => {
   return {
-    type: GET_FRAMES,
-    frames
+    type: GET_FRAMES
+
   }
 }
 
