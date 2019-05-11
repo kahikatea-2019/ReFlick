@@ -2,9 +2,9 @@ import { SET_BRUSH_COLOUR, SET_BRUSH_SIZE } from '../actions'
 
 const initialState = {
   colour: {
-    r: 255,
-    g: 0,
-    b: 0,
+    r: 191,
+    g: 63,
+    b: 63,
     a: 255
   },
   size: 10
