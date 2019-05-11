@@ -38,13 +38,6 @@ class Canvas extends React.Component {
     }
   }
 
-  displayActiveFrame () {
-    console.log('changing to', `frame${this.state.activeFrame}Img`)
-    const context = this.refs.canvas.getContext('2d')
-    const frameImg = this.state[`frame${this.state.activeFrame}Img`]
-    context.putImageData(frameImg, 0, 0)
-  }
-
   initCanvas = () => {
     this.setState({
       frame1Img: this.setBackground(this.state.frame1Img, 255, 0, 0, 255),
@@ -52,16 +45,6 @@ class Canvas extends React.Component {
       frame3Img: this.setBackground(this.state.frame3Img, 0, 0, 255, 255),
       frame4Img: this.setBackground(this.state.frame4Img, 100, 100, 0, 255)
     }, this.displayActiveFrame)
-  }
-
-  updateCanvas = (x, y) => {
-    const context = this.refs.canvas.getContext('2d')
-    const imageData = context.getImageData(0, 0, 500, 500)
-    const updatedImageData = this.paintPixels(imageData, x, y)
-
-    context.putImageData(`frame${this.state.activePage}Img`, 0, 0)
-
-    // context.putImageData(updatedImageData, 0, 0)
   }
 
   // Sets background colour, default is black
@@ -75,6 +58,19 @@ class Canvas extends React.Component {
       data[i + 3] = a
     }
     return imageData
+  }
+
+  displayActiveFrame () {
+    const context = this.refs.canvas.getContext('2d')
+    const frameImg = this.state[`frame${this.state.activeFrame}Img`]
+    context.putImageData(frameImg, 0, 0)
+  }
+
+  updateCanvas = (x, y) => {
+    const context = this.refs.canvas.getContext('2d')
+    const frameImg = this.state[`frame${this.state.activeFrame}Img`]
+    this.paintPixels(frameImg, x, y)
+    this.displayActiveFrame()
   }
 
   // Changes colour for a square of size x size pixels
@@ -134,10 +130,6 @@ class Canvas extends React.Component {
     this.setState({
       mouseDown: false
     })
-    const context = this.refs.canvas.getContext('2d')
-    const imageData = context.getImageData(0, 0, 500, 500)
-    const { dispatch, activeFrame } = this.props
-    dispatch(updateFrameImage(activeFrame, imageData.data))
   }
 
   mouseMoveHandler = e => {
@@ -157,11 +149,6 @@ class Canvas extends React.Component {
           onMouseDown={this.mouseDownHandler}
           onMouseMove={this.mouseMoveHandler}
           onMouseUp={this.mouseUpHandler} />
-        {/* <CanvasView
-          imageData={new ImageData(500, 500)}
-          mouseDownHandler={this.mouseDownHandler}
-          mouseMoveHandler={this.mouseMoveHandler}
-          mouseUpHandler={this.mouseUpHandler}/> */}
         <button
           onClick={this.reset}>
           Reset
