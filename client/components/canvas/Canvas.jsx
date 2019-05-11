@@ -88,9 +88,10 @@ class Canvas extends React.Component {
   }
 
   saveFrameImg = () => {
+    const frame1Map = this.props.frames[0].map
     const imageData = this.state.context.getImageData(0, 0, 500, 500)
     const frame1Img = new Blob([imageData.data.buffer])
-    submitGame({ frame1Img })
+    submitGame({ frame1Img, frame1Map })
       .then(() => {
         return getGameData(30)
           .then(game => {
@@ -166,7 +167,8 @@ const mapStateToProps = state => (
   {
     brushColour: state.brush.colour,
     brushSize: state.brush.size,
-    activeFrame: state.activeFrame
+    activeFrame: state.activeFrame,
+    frames: state.framesReducer
   }
 )
 
