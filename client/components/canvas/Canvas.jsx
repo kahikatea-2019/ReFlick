@@ -15,6 +15,19 @@ class Canvas extends React.Component {
     this.initCanvas()
   }
 
+  componentDidUpdate (prevProps) {
+    if (prevProps.brushColour !== this.props.brushColour) {
+      this.setState({
+        brushColour: this.props.brushColour
+      })
+    }
+    if (prevProps.brushSize !== this.props.brushSize) {
+      this.setState({
+        brushSize: this.props.brushSize
+      })
+    }
+  }
+
   initCanvas = () => {
     const context = this.refs.canvas.getContext('2d')
     this.setState({
