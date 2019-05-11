@@ -32,7 +32,7 @@ class Colours extends React.Component {
 function mapStateToProps (state) {
   return {
     colours: state.coloursReducer.colours,
-    frames: state.framesReducer.frames
+    frames: state.framesReducer
   }
 }
 

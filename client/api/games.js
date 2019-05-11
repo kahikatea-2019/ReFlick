@@ -14,9 +14,10 @@ export function getGameData (id) {
 }
 
 export function submitGame (game) {
-  const { frame1Img } = game
+  const { frame1Img, frame1Map } = game
   const formData = new FormData()
   formData.append('frame1Img', frame1Img)
+  formData.append('frame1Map', JSON.stringify(frame1Map))
   return request
     .post('/api/v1/games')
     .send(formData)
