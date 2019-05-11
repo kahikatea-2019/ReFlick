@@ -24,7 +24,7 @@ class Frames extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    frames: state.framesReducer.frames
+    frames: state.framesReducer
   }
 }
 

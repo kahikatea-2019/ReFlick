@@ -2,13 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { submitGame, getGameData } from '../../api/games'
+import { updateFrameImage } from '../../actions'
 
 class Canvas extends React.Component {
   state = {
     mouseDown: false,
     context: null,
     brushSize: this.props.brushSize,
-    brushColour: this.props.brushColour
+    brushColour: this.props.brushColour,
+    activeFrame: this.props.activeFrame
   }
 
   componentDidMount () {
@@ -24,6 +26,11 @@ class Canvas extends React.Component {
     if (prevProps.brushSize !== this.props.brushSize) {
       this.setState({
         brushSize: this.props.brushSize
+      })
+    }
+    if (prevProps.activeFrame !== this.props.activeFrame) {
+      this.setState({
+        activeFrame: this.props.activeFrame
       })
     }
   }
@@ -81,9 +88,10 @@ class Canvas extends React.Component {
   }
 
   saveFrameImg = () => {
+    const frame1Map = this.props.frames[0].map
     const imageData = this.state.context.getImageData(0, 0, 500, 500)
     const frame1Img = new Blob([imageData.data.buffer])
-    submitGame({ frame1Img })
+    submitGame({ frame1Img, frame1Map })
       .then(() => {
         return getGameData(30)
           .then(game => {
@@ -111,6 +119,9 @@ class Canvas extends React.Component {
     this.setState({
       mouseDown: false
     })
+    const imageData = this.state.context.getImageData(0, 0, 500, 500)
+    const { dispatch, activeFrame } = this.props
+    dispatch(updateFrameImage(activeFrame, imageData.data))
   }
 
   mouseMoveHandler = e => {
@@ -155,7 +166,9 @@ class Canvas extends React.Component {
 const mapStateToProps = state => (
   {
     brushColour: state.brush.colour,
-    brushSize: state.brush.size
+    brushSize: state.brush.size,
+    activeFrame: state.activeFrame,
+    frames: state.framesReducer
   }
 )
 

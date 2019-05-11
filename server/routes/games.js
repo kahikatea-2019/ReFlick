@@ -13,12 +13,12 @@ router.post('/', (req, res) => {
   // Using formidable so structure of req is different now
   console.log(req.fields)
   console.log(req.files)
-  // const { frame1Img }
-  fs.readFile(req.files.frame1Img.path, (err, data) => {
+  const { frame1Map } = req.fields
+  fs.readFile(req.files.frame1Img.path, (err, frame1Img) => {
     if (err) {
       console.log(err)
     }
-    db.submitGame(data)
+    db.submitGame(frame1Img, frame1Map)
       .then(() => { res.send('ok') })
       .catch(err => res.status(500).send(err.message))
   })
