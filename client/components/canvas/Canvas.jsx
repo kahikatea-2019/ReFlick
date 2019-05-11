@@ -7,7 +7,6 @@ import { updateFrameImage } from '../../actions'
 class Canvas extends React.Component {
   state = {
     mouseDown: false,
-    context: null,
     brushSize: this.props.brushSize,
     brushColour: this.props.brushColour,
     activeFrame: this.props.activeFrame
@@ -37,18 +36,21 @@ class Canvas extends React.Component {
 
   initCanvas = () => {
     const context = this.refs.canvas.getContext('2d')
-    this.setState({
-      context
-    })
     const imageData = context.createImageData(500, 500)
     const updatedImageData = this.setBackground(imageData)
     context.putImageData(updatedImageData, 0, 0)
+
+    const frame1Img = { ...updatedImageData }
+    const frame2Img = { ...updatedImageData }
+    const frame3Img = { ...updatedImageData }
+    const frame4Img = { ...updatedImageData }
   }
 
   updateCanvas = (x, y) => {
-    const imageData = this.state.context.getImageData(0, 0, 500, 500)
+    const context = this.refs.canvas.getContext('2d')
+    const imageData = context.getImageData(0, 0, 500, 500)
     const updatedImageData = this.paintPixels(imageData, x, y)
-    this.state.context.putImageData(updatedImageData, 0, 0)
+    context.putImageData(updatedImageData, 0, 0)
   }
 
   // Sets background colour, default is black
@@ -89,11 +91,12 @@ class Canvas extends React.Component {
 
   saveFrameImg = () => {
     const frame1Map = this.props.frames[0].map
-    const imageData = this.state.context.getImageData(0, 0, 500, 500)
+    const context = this.refs.canvas.getContext('2d')
+    const imageData = context.getImageData(0, 0, 500, 500)
     const frame1Img = new Blob([imageData.data.buffer])
     submitGame({ frame1Img, frame1Map })
       .then(() => {
-        return getGameData(30)
+        return getGameData(1)
           .then(game => {
             const returnedArray = Uint8ClampedArray.from(game.frame1Img.data)
             const returnedImageData = new ImageData(returnedArray, 500, 500)
@@ -119,7 +122,8 @@ class Canvas extends React.Component {
     this.setState({
       mouseDown: false
     })
-    const imageData = this.state.context.getImageData(0, 0, 500, 500)
+    const context = this.refs.canvas.getContext('2d')
+    const imageData = context.getImageData(0, 0, 500, 500)
     const { dispatch, activeFrame } = this.props
     dispatch(updateFrameImage(activeFrame, imageData.data))
   }
