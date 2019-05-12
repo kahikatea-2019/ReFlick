@@ -77,17 +77,40 @@ class Canvas extends React.Component {
     const { brushSize } = this.state
     const { r, g, b, a } = this.state.brushColour
     const { width, data } = imageData
-    const centreIndex = (x + y * width) * 4
-    const topLeft = centreIndex - (brushSize / 2 * 4)
 
-    const pixelsToPaint = []
-    for (let i = 0; i < brushSize; i++) {
-      const top = (topLeft + 4 * i)
-      for (let j = 0; j < brushSize; j++) {
-        pixelsToPaint.push(top - (width * 4 * j))
+    const size = brushSize
+    console.log(x, y)
+    const center = [x, y]
+
+    const bottomLeft = [x - size / 2, y - size / 2]
+
+    const square = []
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size; j++) {
+        square.push([ bottomLeft[0] + i, bottomLeft[1] + j ])
       }
     }
-    pixelsToPaint.forEach(i => {
+    console.log(square)
+
+    const inCircle = square.filter(coords => {
+      const x1 = center[0]
+      const y1 = center[1]
+      const x2 = coords[0]
+      const y2 = coords[1]
+      const distance = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
+
+      return distance < (size / 2)
+    })
+
+    console.log(inCircle)
+
+    const circleIndices = inCircle.map(coords => {
+      const x = coords[0]
+      const y = coords[1]
+      return (x + y * width) * 4
+    })
+
+    circleIndices.forEach(i => {
       data[i + 0] = r
       data[i + 1] = g
       data[i + 2] = b
