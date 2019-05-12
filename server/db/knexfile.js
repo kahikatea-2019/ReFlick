@@ -10,10 +10,10 @@ module.exports = {
     },
     useNullAsDefault: true,
     migrations: {
-      directory: path.join(__dirname, 'server/db/migrations')
+      directory: path.join(__dirname, 'migrations')
     },
     seeds: {
-      directory: path.join(__dirname, 'server/db/seeds')
+      directory: path.join(__dirname, 'seeds')
     }
   },
 
@@ -26,10 +26,10 @@ module.exports = {
   },
 
   // migrations: {
-  //   directory: path.join(__dirname, 'server/db/migrations')
+  //   directory: path.join(__dirname, 'migrations')
   // },
   // seeds: {
-  //   directory: path.join(__dirname, 'server/db/seeds')
+  //   directory: path.join(__dirname, 'seeds')
   // }
 
   staging: {
