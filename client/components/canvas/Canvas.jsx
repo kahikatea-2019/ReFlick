@@ -84,13 +84,23 @@ class Canvas extends React.Component {
 
     const bottomLeft = [x - size / 2, y - size / 2]
 
+    function validCoord ([x, y]) {
+      if (x > 0 && x < width) {
+        if (y > 0 && y < width) {
+          return true
+        }
+      }
+      return false
+    }
+
     const square = []
     for (let i = 0; i < size; i++) {
       for (let j = 0; j < size; j++) {
-        square.push([ bottomLeft[0] + i, bottomLeft[1] + j ])
+        if (validCoord([ bottomLeft[0] + i, bottomLeft[1] + j ])) {
+          square.push([ bottomLeft[0] + i, bottomLeft[1] + j ])
+        }
       }
     }
-    console.log(square)
 
     const inCircle = square.filter(coords => {
       const x1 = center[0]
@@ -101,8 +111,6 @@ class Canvas extends React.Component {
 
       return distance < (size / 2)
     })
-
-    console.log(inCircle)
 
     const circleIndices = inCircle.map(coords => {
       const x = coords[0]
@@ -168,6 +176,12 @@ class Canvas extends React.Component {
     }
   }
 
+  onMouseLeaveHandler = e => {
+    this.setState({
+      mouseDown: false
+    })
+  }
+
   render () {
     return (
       <div>
@@ -177,7 +191,8 @@ class Canvas extends React.Component {
           height={500}
           onMouseDown={this.mouseDownHandler}
           onMouseMove={this.mouseMoveHandler}
-          onMouseUp={this.mouseUpHandler} />
+          onMouseUp={this.mouseUpHandler}
+          onMouseLeave={this.onMouseLeaveHandler} />
         <button
           onClick={this.reset}>
           Reset
