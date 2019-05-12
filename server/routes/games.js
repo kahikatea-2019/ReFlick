@@ -11,17 +11,16 @@ router.use(formidableMiddleware())
 // Save game to db
 router.post('/', (req, res) => {
   // Using formidable so structure of req is different now
-  console.log(req.fields)
-  console.log(req.files)
-  const { frame1Map } = req.fields
-  fs.readFile(req.files.frame1Img.path, (err, frame1Img) => {
-    if (err) {
-      console.log(err)
-    }
-    db.submitGame(frame1Img, frame1Map)
-      .then(() => { res.send('ok') })
-      .catch(err => res.status(500).send(err.message))
-  })
+  // console.log(req.fields)
+  // console.log(req.files)
+  const { frame1Map, frame2Map, frame3Map, frame4Map } = req.fields
+  const frame1Img = fs.readFileSync(req.files.frame1Img.path)
+  const frame2Img = fs.readFileSync(req.files.frame2Img.path)
+  const frame3Img = fs.readFileSync(req.files.frame3Img.path)
+  const frame4Img = fs.readFileSync(req.files.frame4Img.path)
+  db.submitGame(frame1Img, frame1Map, frame2Img, frame2Map, frame3Img, frame3Map, frame4Img, frame4Map)
+    .then(() => { res.send('ok') })
+    .catch(err => res.status(500).send(err.message))
 })
 
 // Get game from db
