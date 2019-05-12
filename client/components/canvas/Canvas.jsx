@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { submitGame, getGameData } from '../../api/games'
-import { updateFrameImage } from '../../actions'
 
 class Canvas extends React.Component {
   state = {
@@ -40,10 +39,10 @@ class Canvas extends React.Component {
 
   initCanvas = () => {
     this.setState({
-      frame1Img: this.setBackground(this.state.frame1Img, 255, 0, 0, 255),
-      frame2Img: this.setBackground(this.state.frame2Img, 0, 255, 0, 255),
-      frame3Img: this.setBackground(this.state.frame3Img, 0, 0, 255, 255),
-      frame4Img: this.setBackground(this.state.frame4Img, 100, 100, 0, 255)
+      frame1Img: this.setBackground(this.state.frame1Img),
+      frame2Img: this.setBackground(this.state.frame2Img),
+      frame3Img: this.setBackground(this.state.frame3Img),
+      frame4Img: this.setBackground(this.state.frame4Img)
     }, this.displayActiveFrame)
   }
 
@@ -99,10 +98,17 @@ class Canvas extends React.Component {
 
   saveFrameImg = () => {
     const frame1Map = this.props.frames[0].map
-    const context = this.refs.canvas.getContext('2d')
-    const imageData = context.getImageData(0, 0, 500, 500)
-    const frame1Img = new Blob([imageData.data.buffer])
-    submitGame({ frame1Img, frame1Map })
+    const frame2Map = this.props.frames[1].map
+    const frame3Map = this.props.frames[2].map
+    const frame4Map = this.props.frames[3].map
+
+    const { frame1Img, frame2Img, frame3Img, frame4Img } = this.state
+    const frame1Blob = new Blob([frame1Img.data.buffer])
+    const frame2Blob = new Blob([frame2Img.data.buffer])
+    const frame3Blob = new Blob([frame3Img.data.buffer])
+    const frame4Blob = new Blob([frame4Img.data.buffer])
+
+    submitGame({ frame1Blob, frame1Map, frame2Blob, frame2Map, frame3Blob, frame3Map, frame4Blob, frame4Map })
       .then(() => {
         return getGameData(1)
           .then(game => {
