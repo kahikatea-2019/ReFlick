@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack && node server",
     "dev": "nodemon --watch server & webpack --watch",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "knex": "knex --knexfile server/db/knexfile.js"
   },
   "author": "EDA",
   "license": "ISC",
