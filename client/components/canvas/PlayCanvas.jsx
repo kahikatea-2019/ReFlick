@@ -1,9 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { getGameData } from '../../api/games'
 
-class PlayCanvas extends React.Component {
+export default class PlayCanvas extends React.Component {
   state = {
+    currentFrame: 1,
     colours: {
       red: [191, 63, 63, 255],
       blue: [63, 127, 191, 255],
@@ -28,17 +28,18 @@ class PlayCanvas extends React.Component {
     const { offsetX, offsetY } = e.nativeEvent
     const context = this.refs.playcanvas.getContext('2d')
     const pixelColour = Array.from(context.getImageData(offsetX, offsetY, 1, 1).data)
-    if (JSON.stringify(pixelColour) === JSON.stringify(this.state.colours.red)) {
-      console.log('true')
-    }
-    console.log(pixelColour)
     console.log(this.state)
+    console.log(this.state.game.frame1Map)
 
-    // if (frame.colour === pixelColour) {
+    if (JSON.stringify(pixelColour) === JSON.stringify(this.state.colours.red)) {
+      this.setState({
+        currentFrame: this.state.game.frame1Map
+      })
+    // } else if (JSON.stringify(pixelColour) === JSON.stringify(this.state.colours.blue)) {
     //   this.setState({
-    //     activeFrame: frame[key]
+    //     currentFrame: this.state.game.frame1Map.col2
     //   })
-    // }
+    }
   }
   render () {
     return (
@@ -55,12 +56,5 @@ class PlayCanvas extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
-  return {
-    activeFrame: state.activeFrame
-  }
-}
-
-export default connect(mapStateToProps)(PlayCanvas)
 // Find pixel colour
-// If pixel colour ===
+// If pixel colour === colour number { change frame to colour assigned frame}
