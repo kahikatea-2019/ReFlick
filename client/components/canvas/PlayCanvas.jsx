@@ -1,14 +1,44 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { getGameData } from '../../api/games'
 
-export default class PlayCanvas extends React.Component {
-  // Finds pixel colour onClick
+class PlayCanvas extends React.Component {
+  state = {
+    colours: {
+      red: [191, 63, 63, 255],
+      blue: [63, 127, 191, 255],
+      green: [63, 191, 63, 255],
+      pink: [191, 63, 127, 255]
+    }
+  }
+  componentDidMount () {
+    getGameData(1)
+      .then(game => {
+        const returnedArray = Uint8ClampedArray.from(game.frame1Img.data)
+        const returnedImageData = new ImageData(returnedArray, 500, 500)
+        const context = this.refs.playcanvas.getContext('2d')
+        context.putImageData(returnedImageData, 0, 0)
+        this.setState({
+          game
+        })
+      })
+  }
+
   findPixelColour (e) {
-    console.log(e.nativeEvent.offsetX, e.nativeEvent.offsetX)
-    const x = e.nativeEvent.offsetX
-    const y = e.nativeEvent.offsetY
+    const { offsetX, offsetY } = e.nativeEvent
     const context = this.refs.playcanvas.getContext('2d')
-    var imgData = context.getImageData(x, y, 1, 1).data
-    console.log(imgData)
+    const pixelColour = Array.from(context.getImageData(offsetX, offsetY, 1, 1).data)
+    if (JSON.stringify(pixelColour) === JSON.stringify(this.state.colours.red)) {
+      console.log('true')
+    }
+    console.log(pixelColour)
+    console.log(this.state)
+
+    // if (frame.colour === pixelColour) {
+    //   this.setState({
+    //     activeFrame: frame[key]
+    //   })
+    // }
   }
   render () {
     return (
@@ -25,6 +55,12 @@ export default class PlayCanvas extends React.Component {
   }
 }
 
+function mapStateToProps (state) {
+  return {
+    activeFrame: state.activeFrame
+  }
+}
 
+export default connect(mapStateToProps)(PlayCanvas)
 // Find pixel colour
-// If pixel colour === 
+// If pixel colour ===
