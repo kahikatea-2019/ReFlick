@@ -2,15 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { submitGame, getGameData } from '../../api/games'
-import { updateFrameImage } from '../../actions'
 
 class Canvas extends React.Component {
   state = {
     mouseDown: false,
-    context: null,
     brushSize: this.props.brushSize,
     brushColour: this.props.brushColour,
-    activeFrame: this.props.activeFrame
+    activeFrame: this.props.activeFrame,
+    frame1Img: new ImageData(500, 500),
+    frame2Img: new ImageData(500, 500),
+    frame3Img: new ImageData(500, 500),
+    frame4Img: new ImageData(500, 500)
   }
 
   componentDidMount () {
@@ -31,28 +33,22 @@ class Canvas extends React.Component {
     if (prevProps.activeFrame !== this.props.activeFrame) {
       this.setState({
         activeFrame: this.props.activeFrame
-      })
+      }, this.displayActiveFrame)
     }
   }
 
   initCanvas = () => {
-    const context = this.refs.canvas.getContext('2d')
     this.setState({
-      context
-    })
-    const imageData = context.createImageData(500, 500)
-    const updatedImageData = this.setBackground(imageData)
-    context.putImageData(updatedImageData, 0, 0)
-  }
-
-  updateCanvas = (x, y) => {
-    const imageData = this.state.context.getImageData(0, 0, 500, 500)
-    const updatedImageData = this.paintPixels(imageData, x, y)
-    this.state.context.putImageData(updatedImageData, 0, 0)
+      frame1Img: this.setBackground(this.state.frame1Img),
+      frame2Img: this.setBackground(this.state.frame2Img),
+      frame3Img: this.setBackground(this.state.frame3Img),
+      frame4Img: this.setBackground(this.state.frame4Img)
+    }, this.displayActiveFrame)
   }
 
   // Sets background colour, default is black
   setBackground = (imageData, r = 0, g = 0, b = 0, a = 255) => {
+    // const newImageData = { ...imageData }
     const { data } = imageData
     for (let i = 0; i < imageData.data.length; i += 4) {
       data[i + 0] = r
@@ -61,6 +57,19 @@ class Canvas extends React.Component {
       data[i + 3] = a
     }
     return imageData
+  }
+
+  displayActiveFrame () {
+    const context = this.refs.canvas.getContext('2d')
+    const frameImg = this.state[`frame${this.state.activeFrame}Img`]
+    context.putImageData(frameImg, 0, 0)
+  }
+
+  updateCanvas = (x, y) => {
+    const context = this.refs.canvas.getContext('2d')
+    const frameImg = this.state[`frame${this.state.activeFrame}Img`]
+    this.paintPixels(frameImg, x, y)
+    this.displayActiveFrame()
   }
 
   // Changes colour for a square of size x size pixels
@@ -89,11 +98,19 @@ class Canvas extends React.Component {
 
   saveFrameImg = () => {
     const frame1Map = this.props.frames[0].map
-    const imageData = this.state.context.getImageData(0, 0, 500, 500)
-    const frame1Img = new Blob([imageData.data.buffer])
-    submitGame({ frame1Img, frame1Map })
+    const frame2Map = this.props.frames[1].map
+    const frame3Map = this.props.frames[2].map
+    const frame4Map = this.props.frames[3].map
+
+    const { frame1Img, frame2Img, frame3Img, frame4Img } = this.state
+    const frame1Blob = new Blob([frame1Img.data.buffer])
+    const frame2Blob = new Blob([frame2Img.data.buffer])
+    const frame3Blob = new Blob([frame3Img.data.buffer])
+    const frame4Blob = new Blob([frame4Img.data.buffer])
+
+    submitGame({ frame1Blob, frame1Map, frame2Blob, frame2Map, frame3Blob, frame3Map, frame4Blob, frame4Map })
       .then(() => {
-        return getGameData(30)
+        return getGameData(1)
           .then(game => {
             const returnedArray = Uint8ClampedArray.from(game.frame1Img.data)
             const returnedImageData = new ImageData(returnedArray, 500, 500)
@@ -119,9 +136,6 @@ class Canvas extends React.Component {
     this.setState({
       mouseDown: false
     })
-    const imageData = this.state.context.getImageData(0, 0, 500, 500)
-    const { dispatch, activeFrame } = this.props
-    dispatch(updateFrameImage(activeFrame, imageData.data))
   }
 
   mouseMoveHandler = e => {
@@ -141,11 +155,6 @@ class Canvas extends React.Component {
           onMouseDown={this.mouseDownHandler}
           onMouseMove={this.mouseMoveHandler}
           onMouseUp={this.mouseUpHandler} />
-        {/* <CanvasView
-          imageData={new ImageData(500, 500)}
-          mouseDownHandler={this.mouseDownHandler}
-          mouseMoveHandler={this.mouseMoveHandler}
-          mouseUpHandler={this.mouseUpHandler}/> */}
         <button
           onClick={this.reset}>
           Reset
