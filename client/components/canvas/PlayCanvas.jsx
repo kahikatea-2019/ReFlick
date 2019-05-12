@@ -1,26 +1,33 @@
 import React from 'react'
 import { getGameData } from '../../api/games'
+import { connect } from 'react-redux'
 
-export default class PlayCanvas extends React.Component {
+class PlayCanvas extends React.Component {
   state = {
     currentFrame: 1,
-    colours: {
-      red: [191, 63, 63, 255],
-      blue: [63, 127, 191, 255],
-      green: [63, 191, 63, 255],
-      pink: [191, 63, 127, 255]
-    }
+    // colours: {
+    //   red: [191, 63, 63, 255],
+    //   blue: [63, 127, 191, 255],
+    //   green: [63, 191, 63, 255],
+    //   pink: [191, 63, 127, 255]
+    // }
+    colours: this.props.colours
   }
+
   componentDidMount () {
-    getGameData(1)
+    getGameData(23)
       .then(game => {
-        const returnedArray = Uint8ClampedArray.from(game.frame1Img.data)
-        const returnedImageData = new ImageData(returnedArray, 500, 500)
-        const context = this.refs.playcanvas.getContext('2d')
-        context.putImageData(returnedImageData, 0, 0)
-        this.setState({
-          game
+        const frameIndices = [1, 2, 3, 4]
+        frameIndices.forEach(i => {
+          const clampedArray = Uint8ClampedArray.from(game[`frame${i}Img`].data)
+          const imageData = new ImageData(clampedArray, 500, 500)
+          this.setState({
+            [`frame${i}Img`]: imageData,
+            [`frame${i}Map`]: JSON.parse(game[`frame${i}Map`])
+          })
         })
+        const context = this.refs.playcanvas.getContext('2d')
+        context.putImageData(this.state.frame1Img, 0, 0)
       })
   }
 
@@ -50,11 +57,18 @@ export default class PlayCanvas extends React.Component {
           width={500}
           height={500}>
         </canvas>
-
       </div>
     )
   }
 }
+
+function mapStateToProps (state) {
+  return ({
+    colours: state.coloursReducer
+  })
+}
+
+export default connect(mapStateToProps)(PlayCanvas)
 
 // Find pixel colour
 // If pixel colour === colour number { change frame to colour assigned frame}
