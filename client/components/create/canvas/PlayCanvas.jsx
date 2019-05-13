@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { getGameData } from '../../api/games'
+import { getGameData } from '../../../api/games'
 
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
 

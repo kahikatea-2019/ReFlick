@@ -1,7 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { submitGame } from '../../api/games'
+import { Button } from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
+
+import Toolbar from '../../Toolbar'
+
+import { submitGame } from '../../../api/games'
 
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
 
@@ -197,24 +202,29 @@ class Canvas extends React.Component {
   render () {
     const { canvasHeight, canvasWidth } = this.state
     return (
-      <div>
-        <canvas
-          ref="canvas"
-          width={canvasWidth}
-          height={canvasHeight}
-          onMouseDown={this.mouseDownHandler}
-          onMouseMove={this.mouseMoveHandler}
-          onMouseUp={this.mouseUpHandler}
-          onMouseLeave={this.onMouseLeaveHandler} />
-        <button
-          onClick={this.reset}>
+      <React.Fragment>
+        <Col md="auto">
+          <div>
+            <canvas
+              ref="canvas"
+              width={canvasWidth}
+              height={canvasHeight}
+              onMouseDown={this.mouseDownHandler}
+              onMouseMove={this.mouseMoveHandler}
+              onMouseUp={this.mouseUpHandler}
+              onMouseLeave={this.onMouseLeaveHandler} />
+          </div>
+        </Col>
+        <Col md="auto">
+          <Toolbar/>
+          <Button variant="outline-secondary" onClick={this.reset}>
           Clear
-        </button>
-        <button
-          onClick={this.saveGame}>
+          </Button>
+          <Button variant="outline-secondary" onClick={this.saveFrameImg}>
           Save
-        </button>
-      </div>
+          </Button>
+        </Col>
+      </React.Fragment>
     )
   }
 }
