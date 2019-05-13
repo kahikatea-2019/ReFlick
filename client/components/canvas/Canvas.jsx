@@ -107,37 +107,34 @@ class Canvas extends React.Component {
         }
       }
 
+      const radiusSquared = (size / 2) * (size / 2)
+
       const pixelsInCircle = pixelsSquare.filter(coords => {
         const x1 = center[0]
         const y1 = center[1]
         const x2 = coords[0]
         const y2 = coords[1]
-        const distance = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
-        return distance < (size / 2)
+        const distanceSquared = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)
+        return distanceSquared < radiusSquared
       })
 
-      const circleIndices = pixelsInCircle.map(coords => {
+      pixelsInCircle.forEach(coords => {
         const x = coords[0]
         const y = coords[1]
-        return (x + y * width) * 4
-      })
-
-      // Change the colour of the relevant pixels
-      circleIndices.forEach(i => {
+        const i = (x + y * width) * 4
         data[i + 0] = r
         data[i + 1] = g
         data[i + 2] = b
         data[i + 3] = a
       })
     }
-
     const [x0, y0] = this.state.prevPos
     paintCircle(xClick, yClick)
     
     if (isDragged) {
       const distance = Math.sqrt((xClick - x0) * (xClick - x0) + (yClick - y0) * (yClick - y0))
       console.log(distance)
-      const numPoints = Math.floor(distance / 5)
+      const numPoints = Math.floor(distance / 10)
       const dx = x0 - xClick
       const dy = y0 - yClick
       for (let i = 0; i < numPoints; i++) {
