@@ -10,10 +10,10 @@ export default class Toolbar extends React.Component {
     return (
 
       <Container>
-        <Row>
-          <Col><Frames /></Col>
-          <Col> <Colours/> </Col>
-        </Row>
+      
+          <Col md="auto"><Frames /></Col>
+          <Col md="auto"> <Colours/> </Col>
+       
       </Container>
     )
   }
