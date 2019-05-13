@@ -3,9 +3,9 @@ const initialState = {
   colours: [
     {
       id: 6,
-      r: 255,
-      g: 255,
-      b: 255,
+      r: 217,
+      g: 217,
+      b: 217,
       a: 255
     },
     {

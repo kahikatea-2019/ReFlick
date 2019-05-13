@@ -51,8 +51,8 @@ class Canvas extends React.Component {
     }, this.displayActiveFrame)
   }
 
-  // Sets background colour, default is white
-  setBackground = (imageData, r = 255, g = 255, b = 255, a = 255) => {
+  // Sets background colour, default is grey
+  setBackground = (imageData, r = 217, g = 217, b = 217, a = 255) => {
     const { data } = imageData
     for (let i = 0; i < imageData.data.length; i += 4) {
       data[i + 0] = r
@@ -130,24 +130,21 @@ class Canvas extends React.Component {
     }
     const [x0, y0] = this.state.prevPos
     paintCircle(xClick, yClick)
-    
+
     if (isDragged) {
       const distance = Math.sqrt((xClick - x0) * (xClick - x0) + (yClick - y0) * (yClick - y0))
-      console.log(distance)
       const numPoints = Math.floor(distance / 10)
       const dx = x0 - xClick
       const dy = y0 - yClick
       for (let i = 0; i < numPoints; i++) {
         const ratio = i / numPoints
         paintCircle(xClick + (ratio * dx), yClick + (ratio * dy))
-      }    
+      }
     }
-    
+
     this.setState({
       prevPos: [xClick, yClick]
     })
-
-    
 
     return imageData
   }
@@ -177,7 +174,6 @@ class Canvas extends React.Component {
     })
     const { offsetX: x, offsetY: y } = e.nativeEvent
     this.updateCanvas(x, y, false)
-    
   }
 
   mouseUpHandler = e => {
