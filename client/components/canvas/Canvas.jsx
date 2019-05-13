@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { submitGame, getGameData } from '../../api/games'
+import { submitGame } from '../../api/games'
 
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
 
@@ -16,7 +16,8 @@ class Canvas extends React.Component {
     frame3Img: new ImageData(CANVAS_WIDTH, CANVAS_HEIGHT),
     frame4Img: new ImageData(CANVAS_WIDTH, CANVAS_HEIGHT),
     canvasHeight: CANVAS_HEIGHT,
-    canvasWidth: CANVAS_WIDTH
+    canvasWidth: CANVAS_WIDTH,
+    prevPos: [null, null]
   }
 
   componentDidMount () {
@@ -50,8 +51,8 @@ class Canvas extends React.Component {
     }, this.displayActiveFrame)
   }
 
-  // Sets background colour, default is white
-  setBackground = (imageData, r = 255, g = 255, b = 255, a = 255) => {
+  // Sets background colour, default is grey
+  setBackground = (imageData, r = 217, g = 217, b = 217, a = 255) => {
     const { data } = imageData
     for (let i = 0; i < imageData.data.length; i += 4) {
       data[i + 0] = r
@@ -68,22 +69,23 @@ class Canvas extends React.Component {
     context.putImageData(frameImg, 0, 0)
   }
 
-  updateCanvas = (x, y) => {
+  updateCanvas = (x, y, isDragged) => {
     const context = this.refs.canvas.getContext('2d')
     const frameImg = this.state[`frame${this.state.activeFrame}Img`]
-    this.paintPixels(frameImg, x, y)
+    this.paintPixels(frameImg, x, y, isDragged)
     this.displayActiveFrame()
   }
 
-  paintPixels (imageData, x, y) {
+  paintPixels (imageData, xClick, yClick, isDragged) {
     const { brushSize } = this.state
     const { r, g, b, a } = this.state.brushColour
     const { width, data } = imageData
-
     const size = brushSize
-    const center = [x, y]
 
-    function paintCircle (x, y) {
+    function paintCircle (xIn, yIn) {
+      const x = Math.round(xIn)
+      const y = Math.round(yIn)
+      const center = [x, y]
       const bottomLeft = [x - size / 2, y - size / 2]
 
       function isValidCoord ([x, y]) {
@@ -104,52 +106,65 @@ class Canvas extends React.Component {
         }
       }
 
+      const radiusSquared = (size / 2) * (size / 2)
+
       const pixelsInCircle = pixelsSquare.filter(coords => {
         const x1 = center[0]
         const y1 = center[1]
         const x2 = coords[0]
         const y2 = coords[1]
-        const distance = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
-        return distance < (size / 2)
+        const distanceSquared = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)
+        return distanceSquared < radiusSquared
       })
 
-      const circleIndices = pixelsInCircle.map(coords => {
+      pixelsInCircle.forEach(coords => {
         const x = coords[0]
         const y = coords[1]
-        return (x + y * width) * 4
-      })
-
-      // Change the colour of the relevant pixels
-      circleIndices.forEach(i => {
+        const i = (x + y * width) * 4
         data[i + 0] = r
         data[i + 1] = g
         data[i + 2] = b
         data[i + 3] = a
       })
     }
+    const [x0, y0] = this.state.prevPos
+    paintCircle(xClick, yClick)
 
-    paintCircle(x, y)
+    if (isDragged) {
+      const distance = Math.sqrt((xClick - x0) * (xClick - x0) + (yClick - y0) * (yClick - y0))
+      const numPoints = Math.floor(distance / 5)
+      const dx = x0 - xClick
+      const dy = y0 - yClick
+      for (let i = 0; i < numPoints; i++) {
+        const ratio = i / numPoints
+        paintCircle(xClick + (ratio * dx), yClick + (ratio * dy))
+      }
+    }
+
+    this.setState({
+      prevPos: [xClick, yClick]
+    })
 
     return imageData
   }
 
-  saveFrameImg = () => {
+  saveGame = () => {
     const frame1Map = this.props.frames[0].map
     const frame2Map = this.props.frames[1].map
     const frame3Map = this.props.frames[2].map
     const frame4Map = this.props.frames[3].map
-
     const { frame1Img, frame2Img, frame3Img, frame4Img } = this.state
     const frame1Blob = new Blob([frame1Img.data.buffer])
     const frame2Blob = new Blob([frame2Img.data.buffer])
     const frame3Blob = new Blob([frame3Img.data.buffer])
     const frame4Blob = new Blob([frame4Img.data.buffer])
-
     submitGame({ frame1Blob, frame1Map, frame2Blob, frame2Map, frame3Blob, frame3Map, frame4Blob, frame4Map })
   }
 
-  reset = e => {
-    this.initCanvas()
+  clearFrame = e => {
+    const { activeFrame } = this.state
+    this.setBackground(this.state[`frame${activeFrame}Img`])
+    this.displayActiveFrame()
   }
 
   mouseDownHandler = e => {
@@ -157,7 +172,7 @@ class Canvas extends React.Component {
       mouseDown: true
     })
     const { offsetX: x, offsetY: y } = e.nativeEvent
-    this.updateCanvas(x, y)
+    this.updateCanvas(x, y, false)
   }
 
   mouseUpHandler = e => {
@@ -169,7 +184,7 @@ class Canvas extends React.Component {
   mouseMoveHandler = e => {
     if (this.state.mouseDown) {
       const { offsetX: x, offsetY: y } = e.nativeEvent
-      this.updateCanvas(x, y)
+      this.updateCanvas(x, y, true)
     }
   }
 
@@ -193,10 +208,10 @@ class Canvas extends React.Component {
           onMouseLeave={this.onMouseLeaveHandler} />
         <button
           onClick={this.reset}>
-          Reset
+          Clear
         </button>
         <button
-          onClick={this.saveFrameImg}>
+          onClick={this.saveGame}>
           Save
         </button>
       </div>
