@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { submitGame, getGameData } from '../../api/games'
+import { submitGame } from '../../api/games'
 
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
 
@@ -149,7 +149,7 @@ class Canvas extends React.Component {
     return imageData
   }
 
-  saveFrameImg = () => {
+  saveGame = () => {
     const frame1Map = this.props.frames[0].map
     const frame2Map = this.props.frames[1].map
     const frame3Map = this.props.frames[2].map
@@ -164,8 +164,10 @@ class Canvas extends React.Component {
     submitGame({ frame1Blob, frame1Map, frame2Blob, frame2Map, frame3Blob, frame3Map, frame4Blob, frame4Map })
   }
 
-  reset = e => {
-    this.initCanvas()
+  clearFrame = e => {
+    const { activeFrame } = this.state
+    this.setBackground(this.state[`frame${activeFrame}Img`])
+    this.displayActiveFrame()
   }
 
   mouseDownHandler = e => {
@@ -209,10 +211,10 @@ class Canvas extends React.Component {
           onMouseLeave={this.onMouseLeaveHandler} />
         <button
           onClick={this.reset}>
-          Reset
+          Clear
         </button>
         <button
-          onClick={this.saveFrameImg}>
+          onClick={this.saveGame}>
           Save
         </button>
       </div>
