@@ -17,7 +17,7 @@ class Canvas extends React.Component {
     frame4Img: new ImageData(CANVAS_WIDTH, CANVAS_HEIGHT),
     canvasHeight: CANVAS_HEIGHT,
     canvasWidth: CANVAS_WIDTH,
-    prevPos: []
+    prevPos: [null, null]
   }
 
   componentDidMount () {
@@ -69,21 +69,23 @@ class Canvas extends React.Component {
     context.putImageData(frameImg, 0, 0)
   }
 
-  updateCanvas = (x, y) => {
+  updateCanvas = (x, y, isDragged) => {
     const context = this.refs.canvas.getContext('2d')
     const frameImg = this.state[`frame${this.state.activeFrame}Img`]
-    this.paintPixels(frameImg, x, y)
+    this.paintPixels(frameImg, x, y, isDragged)
     this.displayActiveFrame()
   }
 
-  paintPixels (imageData, xClick, yClick) {
+  paintPixels (imageData, xClick, yClick, isDragged) {
     const { brushSize } = this.state
     const { r, g, b, a } = this.state.brushColour
     const { width, data } = imageData
 
     const size = brushSize
 
-    function paintCircle (x, y) {
+    function paintCircle (xIn, yIn) {
+      const x = Math.round(xIn)
+      const y = Math.round(yIn)
       const center = [x, y]
       const bottomLeft = [x - size / 2, y - size / 2]
 
@@ -129,14 +131,26 @@ class Canvas extends React.Component {
       })
     }
 
-    const { prevPos } = this.state
+    const [x0, y0] = this.state.prevPos
     paintCircle(xClick, yClick)
-    // console.log(prevPos)
-    paintCircle((prevPos[0] + xClick) / 2, (prevPos[1] + yClick) / 2)
-
+    
+    if (isDragged) {
+      const distance = Math.sqrt((xClick - x0) * (xClick - x0) + (yClick - y0) * (yClick - y0))
+      console.log(distance)
+      const numPoints = Math.floor(distance / 5)
+      const dx = x0 - xClick
+      const dy = y0 - yClick
+      for (let i = 0; i < numPoints; i++) {
+        const ratio = i / numPoints
+        paintCircle(xClick + (ratio * dx), yClick + (ratio * dy))
+      }    
+    }
+    
     this.setState({
       prevPos: [xClick, yClick]
     })
+
+    
 
     return imageData
   }
@@ -165,7 +179,8 @@ class Canvas extends React.Component {
       mouseDown: true
     })
     const { offsetX: x, offsetY: y } = e.nativeEvent
-    this.updateCanvas(x, y)
+    this.updateCanvas(x, y, false)
+    
   }
 
   mouseUpHandler = e => {
@@ -177,7 +192,7 @@ class Canvas extends React.Component {
   mouseMoveHandler = e => {
     if (this.state.mouseDown) {
       const { offsetX: x, offsetY: y } = e.nativeEvent
-      this.updateCanvas(x, y)
+      this.updateCanvas(x, y, true)
     }
   }
 
