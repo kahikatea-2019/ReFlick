@@ -6,11 +6,12 @@ import PlayCanvas from '../canvas/PlayCanvas'
 
 export default class Base extends React.Component {
   render () {
+    const { id } = this.props.match.params
     return (
       <Container>
         <Row><Header/></Row>
         <Row>
-          <Col><PlayCanvas/></Col>
+          <Col><PlayCanvas id={id}/></Col>
         </Row>
         <Row><Footer/></Row>
       </Container>
