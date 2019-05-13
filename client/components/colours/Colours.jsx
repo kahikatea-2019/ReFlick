@@ -6,6 +6,7 @@ import Colour from './Colour'
 import Pen from '../Pen'
 
 class Colours extends React.Component {
+  
   renderColour (colours, frames) {
     return (
       colours.map(colour =>
@@ -17,6 +18,7 @@ class Colours extends React.Component {
   componentDidMount () {
     // return getGamesData(1)
   }
+
   render () {
     const { colours, frames } = this.props
     return (

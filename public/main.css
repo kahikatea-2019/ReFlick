@@ -78,3 +78,16 @@ button {
   border-right: 10px solid transparent;
   border-top: 10px solid #f00;
 }
+
+.base {
+  background-color: rgba(179, 215, 236, 0.42);
+  height: 92vh;
+}
+
+.sheet {
+  background-color: white;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  height: 110vh;
+  box-shadow: 5px 5px 2.5px 0px rgba(0,0,0,0.515);
+}

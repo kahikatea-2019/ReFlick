@@ -19,15 +19,15 @@ class Colour extends React.Component {
     const newFrame = this.state.newFrame
     const { dispatch, activeFrame } = this.props
     // Typical usage (don't forget to compare props):
-    if (this.props.activeFrame !== prevProps.activeFrame) {
-      console.log('Props', this.props)
-      console.log('Prev Props', prevProps)
-      console.log('NewFrame:', newFrame)
-      dispatch(updateFrameState(this.state))
-      if (newFrame) {
-        this.setState({frameMap: null})
-      }
-    }
+    // if (this.props.activeFrame !== prevProps.activeFrame) {
+    //   console.log('Props', this.props)
+    //   console.log('Prev Props', prevProps)
+    //   console.log('NewFrame:', newFrame)
+    //   dispatch(updateFrameState(frame, this.state))
+    //   if (newFrame) {
+    //     this.setState({frameMap: null})
+    //   }
+    // }
   }
 
   returnDropdowns (colour, frames) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Col, Row } from 'react-bootstrap'
+import {Container, Col, Row} from 'react-bootstrap'
 import Header from './Header'
 import Footer from './Footer'
 import Colours from '../colours/Colours'
@@ -10,12 +10,14 @@ export default class Base extends React.Component {
   render () {
     return (
       <Container>
-        <Row><Header/></Row>
-        <Row>
-          <Col ><Colours/></Col>
-          <Col xs={8}><Canvas/></Col>
-          <Col ><Frames/></Col>
-        </Row>
+        <div className="sheet">
+          <Row><Header/></Row>
+          <Row>
+            <Col ><Colours/></Col>
+            <Col xs={8}><Canvas/></Col>
+            <Col ><Frames/></Col>
+          </Row>
+        </div>
         <Row><Footer/></Row>
       </Container>
     )
