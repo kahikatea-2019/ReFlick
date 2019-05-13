@@ -5,7 +5,7 @@ import { Dropdown } from 'react-bootstrap'
 import CustomToggle from '../toggle-menu/CustomToggle'
 import CustomMenu from '../toggle-menu/CustomMenu'
 
-import { setBrushColour, updateFrameMap } from '../../actions/'
+import { setBrushColour, updateFrameMap, updateFrameState } from '../../actions/'
 
 class Colour extends React.Component {
   state = {
@@ -16,12 +16,17 @@ class Colour extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const newFrame = this.state.newFrame
+    const { dispatch, activeFrame } = this.props
     // Typical usage (don't forget to compare props):
-    if (this.props !== prevProps) {
+    if (this.props.activeFrame !== prevProps.activeFrame) {
       console.log('Props', this.props)
       console.log('Prev Props', prevProps)
-      console.log('NewFrame:', state.newFrame)
-      // this.setState({frameMap: null})
+      console.log('NewFrame:', newFrame)
+      dispatch(updateFrameState(this.state))
+      if (newFrame) {
+        this.setState({frameMap: null})
+      }
     }
   }
 

@@ -5,6 +5,7 @@ export const SET_BRUSH_COLOUR = 'SET_BRUSH_COLOUR'
 export const SET_BRUSH_SIZE = 'SET_BRUSH_SIZE'
 export const UPDATE_FRAME_IMAGE = 'UPDATE_FRAME_IMAGE'
 export const UPDATE_FRAME_MAP = 'UPDATE_FRAME_MAP'
+export const FRAME_STATE = 'FRAME_STATE'
 
 export const getColours = (colours) => {
   return {
@@ -55,5 +56,13 @@ export const updateFrameMap = (frameId, colourId, colourMap) => {
     frameId,
     colourId, // id number for colour
     colourMap // id number for frame
+  }
+}
+
+export const updateFrameState = (frameId, stateObj) => {
+  return {
+    type: FRAME_STATE,
+    frameId,
+    stateObj
   }
 }
