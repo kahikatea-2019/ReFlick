@@ -50,8 +50,8 @@ class Canvas extends React.Component {
     }, this.displayActiveFrame)
   }
 
-  // Sets background colour, default is black
-  setBackground = (imageData, r = 0, g = 0, b = 0, a = 255) => {
+  // Sets background colour, default is white
+  setBackground = (imageData, r = 255, g = 255, b = 255, a = 255) => {
     const { data } = imageData
     for (let i = 0; i < imageData.data.length; i += 4) {
       data[i + 0] = r
