@@ -2,12 +2,12 @@ import { SET_BRUSH_COLOUR, SET_BRUSH_SIZE } from '../actions'
 
 const initialState = {
   colour: {
-    r: 191,
-    g: 63,
-    b: 63,
+    r: 239,
+    g: 201,
+    b: 76,
     a: 255
   },
-  size: 10
+  size: 20
 }
 
 function brushReducer (state = initialState, action) {
