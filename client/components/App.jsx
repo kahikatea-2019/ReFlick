@@ -9,7 +9,7 @@ export default function App () {
     <Router>
       <Switch>
         <Route exact path='/' component={Base} />
-        <Route exact path='/play' component={PlayBase} />
+        <Route path='/play/:id' component={PlayBase} />
       </Switch>
     </Router>
   )
