@@ -20,11 +20,13 @@ class Colours extends React.Component {
   render () {
     const { colours, frames } = this.props
     return (
+
       <div>
         <h2> Colours </h2>
         {this.renderColour(colours, frames)}
         <Pen />
       </div>
+
     )
   }
 }

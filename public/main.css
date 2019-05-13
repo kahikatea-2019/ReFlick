@@ -103,11 +103,26 @@ button {
  }
 
  .sheet {
+   display: flex;
   background-color: white;
-  padding-left: 10vw;
-  padding-right: 10vw; //fix
+  padding-left: 1vw;
+  padding-right: 1vw; 
   height: 110vh;
   box-shadow: 4px 4px 2.5px 0px rgba(0,0,0,0.4); 
 } 
 
 
+.right {
+display: flex;
+flex-direction: row 
+}
+
+.frameView {
+  display: flex;
+  flex-direction: row 
+}
+
+.colourView {
+  display: flex;
+  flex-direction: row 
+}

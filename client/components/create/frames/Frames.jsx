@@ -14,9 +14,11 @@ class Frames extends React.Component {
   render () {
     const { frames } = this.props
     return (
-      <div>
-        <h2> Frames </h2>
-        {this.renderFrames(frames, this.props.dispatch)}
+    
+        <div>
+          <h2> Frames </h2>
+          {this.renderFrames(frames, this.props.dispatch)}
+      
       </div>
     )
   }
