@@ -5,9 +5,11 @@ import Frame from './Frame'
 class Frames extends React.Component {
   renderFrames (frames, dispatch) {
     return (
-      frames.map(frame =>
-        <Frame key={frame.id} frame={frame.name} dispatch={dispatch} />
-      )
+      frames.map(frame => {
+        if (frame.name !== 'None') {
+          return <Frame key={frame.id} frame={frame.name} dispatch={dispatch} />
+        }
+      })
     )
   }
 

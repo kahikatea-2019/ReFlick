@@ -9,7 +9,16 @@ import { setBrushColour, updateFrameMap } from '../../actions/'
 
 class Colour extends React.Component {
   state = {
-    frameMap: '0'
+    colour: null,
+    frameMap: null
+  }
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.activeFrame !== prevProps.activeFrame) {
+      this.state
+      this.setState({frameMap: null})
+    }
   }
 
   returnDropdowns (colour, frames) {
@@ -18,7 +27,7 @@ class Colour extends React.Component {
       return <Dropdown.Item
         onClick={() => {
           console.log('Colour:', colour + '\n' + 'Frame:', frame.id)
-          this.setState({ frameMap: frame.id.toString() })
+          this.setState({ frameMap: frame.id, colour: colour.id })
           dispatch(updateFrameMap(activeFrame, colour.id, frame.id))
         }}
         key={frame.id + colour}>{frame.name}</Dropdown.Item>
