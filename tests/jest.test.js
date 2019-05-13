@@ -1,3 +1,3 @@
 test('Jest is working correctly', () => {
-    expect(true).toBe(true)
-  })
+  expect(true).toBe(true)
+})
