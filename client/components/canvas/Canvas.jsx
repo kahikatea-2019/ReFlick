@@ -16,7 +16,8 @@ class Canvas extends React.Component {
     frame3Img: new ImageData(CANVAS_WIDTH, CANVAS_HEIGHT),
     frame4Img: new ImageData(CANVAS_WIDTH, CANVAS_HEIGHT),
     canvasHeight: CANVAS_HEIGHT,
-    canvasWidth: CANVAS_WIDTH
+    canvasWidth: CANVAS_WIDTH,
+    prevPos: []
   }
 
   componentDidMount () {
@@ -75,15 +76,15 @@ class Canvas extends React.Component {
     this.displayActiveFrame()
   }
 
-  paintPixels (imageData, x, y) {
+  paintPixels (imageData, xClick, yClick) {
     const { brushSize } = this.state
     const { r, g, b, a } = this.state.brushColour
     const { width, data } = imageData
 
     const size = brushSize
-    const center = [x, y]
 
     function paintCircle (x, y) {
+      const center = [x, y]
       const bottomLeft = [x - size / 2, y - size / 2]
 
       function isValidCoord ([x, y]) {
@@ -128,7 +129,14 @@ class Canvas extends React.Component {
       })
     }
 
-    paintCircle(x, y)
+    const { prevPos } = this.state
+    paintCircle(xClick, yClick)
+    // console.log(prevPos)
+    paintCircle((prevPos[0] + xClick) / 2, (prevPos[1] + yClick) / 2)
+
+    this.setState({
+      prevPos: [xClick, yClick]
+    })
 
     return imageData
   }
