@@ -10,7 +10,8 @@ class PlayCanvas extends React.Component {
   }
 
   componentDidMount () {
-    getGameData(24)
+    const { id } = this.props
+    getGameData(id)
       .then(game => {
         const frameIndices = [1, 2, 3, 4]
         frameIndices.forEach(i => {
