@@ -80,7 +80,6 @@ class Canvas extends React.Component {
     const { brushSize } = this.state
     const { r, g, b, a } = this.state.brushColour
     const { width, data } = imageData
-
     const size = brushSize
 
     function paintCircle (xIn, yIn) {
@@ -133,7 +132,7 @@ class Canvas extends React.Component {
 
     if (isDragged) {
       const distance = Math.sqrt((xClick - x0) * (xClick - x0) + (yClick - y0) * (yClick - y0))
-      const numPoints = Math.floor(distance / 10)
+      const numPoints = Math.floor(distance / 5)
       const dx = x0 - xClick
       const dy = y0 - yClick
       for (let i = 0; i < numPoints; i++) {
@@ -154,13 +153,11 @@ class Canvas extends React.Component {
     const frame2Map = this.props.frames[1].map
     const frame3Map = this.props.frames[2].map
     const frame4Map = this.props.frames[3].map
-
     const { frame1Img, frame2Img, frame3Img, frame4Img } = this.state
     const frame1Blob = new Blob([frame1Img.data.buffer])
     const frame2Blob = new Blob([frame2Img.data.buffer])
     const frame3Blob = new Blob([frame3Img.data.buffer])
     const frame4Blob = new Blob([frame4Img.data.buffer])
-
     submitGame({ frame1Blob, frame1Map, frame2Blob, frame2Map, frame3Blob, frame3Map, frame4Blob, frame4Map })
   }
 
