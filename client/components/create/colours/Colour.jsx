@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { Dropdown } from 'react-bootstrap'
-import CustomToggle from '../toggle-menu/CustomToggle'
-import CustomMenu from '../toggle-menu/CustomMenu'
+import CustomToggle from '../../layout/toggle-menu/CustomToggle'
+import CustomMenu from '../../layout/toggle-menu/CustomMenu'
 
-import { setBrushColour, updateFrameMap } from '../../actions/'
+import { setBrushColour, updateFrameMap } from '../../../actions/'
 
 class Colour extends React.Component {
   state = {

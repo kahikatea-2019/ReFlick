@@ -1,5 +1,5 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import Frame from './Frame'
 
 class Frames extends React.Component {
@@ -12,9 +12,9 @@ class Frames extends React.Component {
   }
 
   render () {
-    const {frames} = this.props
+    const { frames } = this.props
     return (
-      <div className = "right">
+      <div>
         <h2> Frames </h2>
         {this.renderFrames(frames, this.props.dispatch)}
       </div>

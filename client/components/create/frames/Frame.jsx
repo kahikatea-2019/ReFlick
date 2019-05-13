@@ -1,5 +1,5 @@
 import React from 'react'
-import { setFrame } from '../../actions'
+import { setFrame } from '../../../actions'
 import { connect } from 'react-redux'
 
 function Frame (props) {

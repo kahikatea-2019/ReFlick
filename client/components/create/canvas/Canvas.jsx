@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { submitGame, getGameData } from '../../api/games'
+import { submitGame, getGameData } from '../../../api/games'
 
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
 
@@ -184,6 +184,7 @@ class Canvas extends React.Component {
     return (
       <div>
         <canvas
+          
           ref="canvas"
           width={canvasWidth}
           height={canvasHeight}

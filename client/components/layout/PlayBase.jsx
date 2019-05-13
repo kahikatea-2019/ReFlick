@@ -2,19 +2,16 @@ import React from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
 import Header from './Header'
 import Footer from './Footer'
-import Colours from '../colours/Colours'
-import Frames from '../frames/Frames'
-import Canvas from '../canvas/Canvas'
+import PlayCanvas from '../../components/create/canvas/PlayCanvas'
 
 export default class Base extends React.Component {
   render () {
+    const { id } = this.props.match.params
     return (
       <Container>
         <Row><Header/></Row>
         <Row>
-          <Col ><Colours/></Col>
-          <Col xs={8}><Canvas/></Col>
-          <Col ><Frames/></Col>
+          <Col><PlayCanvas id={id}/></Col>
         </Row>
         <Row><Footer/></Row>
       </Container>
