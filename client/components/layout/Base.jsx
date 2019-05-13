@@ -8,14 +8,13 @@ export default class Base extends React.Component {
   render () {
     return (
 
-      <div className="sheet">
-        <Container>
-          <Row>
-            <Col><Canvas/></Col>
-            <Col><Toolbar/></Col>
-          </Row>
-        </Container>
-      </div>
+      <Container>
+        <Row>
+          <Col><Canvas/></Col>
+          <Col><Toolbar/></Col>
+        </Row>
+      </Container>
+
     )
   }
 }

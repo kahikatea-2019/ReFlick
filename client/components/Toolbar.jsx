@@ -12,7 +12,6 @@ export default class Toolbar extends React.Component {
       <Container>
         <Row>
           <Col><Frames /></Col>
-
           <Col> <Colours/> </Col>
         </Row>
       </Container>

@@ -15,14 +15,13 @@ export default function App () {
       <Container>
       
           <Row className="header" ><Header/></Row>
-     
-          <Row>
+          <Row className="sheet">
+
             <Switch>
               <Route exact path='/' component={Base} />
               <Route path='/play/:id' component={PlayBase} />
             </Switch>
           </Row>
-
           <Row><Footer/></Row>
       
       </Container>
