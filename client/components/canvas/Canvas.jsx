@@ -3,16 +3,20 @@ import { connect } from 'react-redux'
 
 import { submitGame, getGameData } from '../../api/games'
 
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
+
 class Canvas extends React.Component {
   state = {
     mouseDown: false,
     brushSize: this.props.brushSize,
     brushColour: this.props.brushColour,
     activeFrame: this.props.activeFrame,
-    frame1Img: new ImageData(500, 500),
-    frame2Img: new ImageData(500, 500),
-    frame3Img: new ImageData(500, 500),
-    frame4Img: new ImageData(500, 500)
+    frame1Img: new ImageData(CANVAS_WIDTH, CANVAS_HEIGHT),
+    frame2Img: new ImageData(CANVAS_WIDTH, CANVAS_HEIGHT),
+    frame3Img: new ImageData(CANVAS_WIDTH, CANVAS_HEIGHT),
+    frame4Img: new ImageData(CANVAS_WIDTH, CANVAS_HEIGHT),
+    canvasHeight: CANVAS_HEIGHT,
+    canvasWidth: CANVAS_WIDTH
   }
 
   componentDidMount () {
@@ -142,15 +146,6 @@ class Canvas extends React.Component {
     const frame4Blob = new Blob([frame4Img.data.buffer])
 
     submitGame({ frame1Blob, frame1Map, frame2Blob, frame2Map, frame3Blob, frame3Map, frame4Blob, frame4Map })
-      .then(() => {
-        return getGameData(1)
-          .then(game => {
-            const returnedArray = Uint8ClampedArray.from(game.frame1Img.data)
-            const returnedImageData = new ImageData(returnedArray, 500, 500)
-            const context = this.refs.canvas2.getContext('2d')
-            context.putImageData(returnedImageData, 0, 0)
-          })
-      })
   }
 
   reset = e => {
@@ -185,12 +180,13 @@ class Canvas extends React.Component {
   }
 
   render () {
+    const { canvasHeight, canvasWidth } = this.state
     return (
       <div>
         <canvas
           ref="canvas"
-          width={500}
-          height={500}
+          width={canvasWidth}
+          height={canvasHeight}
           onMouseDown={this.mouseDownHandler}
           onMouseMove={this.mouseMoveHandler}
           onMouseUp={this.mouseUpHandler}
@@ -203,10 +199,6 @@ class Canvas extends React.Component {
           onClick={this.saveFrameImg}>
           Save
         </button>
-        <canvas
-          ref="canvas2"
-          width={500}
-          height={500} />
       </div>
     )
   }

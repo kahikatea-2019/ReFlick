@@ -3,19 +3,24 @@ import { connect } from 'react-redux'
 
 import { getGameData } from '../../api/games'
 
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
+
 class PlayCanvas extends React.Component {
   state = {
     currentFrame: 1,
-    colours: this.props.colours
+    colours: this.props.colours,
+    canvasHeight: CANVAS_HEIGHT,
+    canvasWidth: CANVAS_WIDTH
   }
 
   componentDidMount () {
-    getGameData(24)
+    const { canvasHeight, canvasWidth } = this.state
+    getGameData(25)
       .then(game => {
         const frameIndices = [1, 2, 3, 4]
         frameIndices.forEach(i => {
           const clampedArray = Uint8ClampedArray.from(game[`frame${i}Img`].data)
-          const imageData = new ImageData(clampedArray, 500, 500)
+          const imageData = new ImageData(clampedArray, canvasWidth, canvasHeight)
           this.setState({
             [`frame${i}Img`]: imageData,
             [`frame${i}Map`]: JSON.parse(game[`frame${i}Map`])
@@ -60,13 +65,14 @@ class PlayCanvas extends React.Component {
   }
 
   render () {
+    const { canvasHeight, canvasWidth } = this.state
     return (
       <div id ="playcanvas">
         <canvas
           onClick={this.clickHandler}
           ref="playcanvas"
-          width={500}
-          height={500}>
+          width={canvasWidth}
+          height={canvasHeight}>
         </canvas>
       </div>
     )
