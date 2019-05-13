@@ -48,7 +48,6 @@ class Canvas extends React.Component {
 
   // Sets background colour, default is black
   setBackground = (imageData, r = 0, g = 0, b = 0, a = 255) => {
-    // const newImageData = { ...imageData }
     const { data } = imageData
     for (let i = 0; i < imageData.data.length; i += 4) {
       data[i + 0] = r
@@ -72,27 +71,61 @@ class Canvas extends React.Component {
     this.displayActiveFrame()
   }
 
-  // Changes colour for a square of size x size pixels
   paintPixels (imageData, x, y) {
     const { brushSize } = this.state
     const { r, g, b, a } = this.state.brushColour
     const { width, data } = imageData
-    const centreIndex = (x + y * width) * 4
-    const topLeft = centreIndex - (brushSize / 2 * 4)
 
-    const pixelsToPaint = []
-    for (let i = 0; i < brushSize; i++) {
-      const top = (topLeft + 4 * i)
-      for (let j = 0; j < brushSize; j++) {
-        pixelsToPaint.push(top - (width * 4 * j))
+    const size = brushSize
+    const center = [x, y]
+
+    function paintCircle (x, y) {
+      const bottomLeft = [x - size / 2, y - size / 2]
+
+      function isValidCoord ([x, y]) {
+        if (x > 0 && x < width) {
+          if (y > 0 && y < width) {
+            return true
+          }
+        }
+        return false
       }
+
+      const pixelsSquare = []
+      for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+          if (isValidCoord([ bottomLeft[0] + i, bottomLeft[1] + j ])) {
+            pixelsSquare.push([ bottomLeft[0] + i, bottomLeft[1] + j ])
+          }
+        }
+      }
+
+      const pixelsInCircle = pixelsSquare.filter(coords => {
+        const x1 = center[0]
+        const y1 = center[1]
+        const x2 = coords[0]
+        const y2 = coords[1]
+        const distance = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
+        return distance < (size / 2)
+      })
+
+      const circleIndices = pixelsInCircle.map(coords => {
+        const x = coords[0]
+        const y = coords[1]
+        return (x + y * width) * 4
+      })
+
+      // Change the colour of the relevant pixels
+      circleIndices.forEach(i => {
+        data[i + 0] = r
+        data[i + 1] = g
+        data[i + 2] = b
+        data[i + 3] = a
+      })
     }
-    pixelsToPaint.forEach(i => {
-      data[i + 0] = r
-      data[i + 1] = g
-      data[i + 2] = b
-      data[i + 3] = a
-    })
+
+    paintCircle(x, y)
+
     return imageData
   }
 
@@ -145,6 +178,12 @@ class Canvas extends React.Component {
     }
   }
 
+  onMouseLeaveHandler = e => {
+    this.setState({
+      mouseDown: false
+    })
+  }
+
   render () {
     return (
       <div>
@@ -154,7 +193,8 @@ class Canvas extends React.Component {
           height={500}
           onMouseDown={this.mouseDownHandler}
           onMouseMove={this.mouseMoveHandler}
-          onMouseUp={this.mouseUpHandler} />
+          onMouseUp={this.mouseUpHandler}
+          onMouseLeave={this.onMouseLeaveHandler} />
         <button
           onClick={this.reset}>
           Reset
