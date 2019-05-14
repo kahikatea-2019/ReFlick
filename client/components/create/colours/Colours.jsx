@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Colour from './Colour'
-// import { getGamesData } from '../../../actions'
 
-import Pen from '../draw/Pen'
+import Colour from './Colour'
 
 class Colours extends React.Component {
   renderColour (colours, frames) {
@@ -14,16 +12,12 @@ class Colours extends React.Component {
     )
   }
 
-  componentDidMount () {
-    // return getGamesData(1)
-  }
   render () {
     const { colours, frames } = this.props
     return (
-      <div>
-        <h2> Colours </h2>
+      <div className="colours">
+        <h4> Colours </h4>
         {this.renderColour(colours, frames)}
-        <Pen />
       </div>
     )
   }

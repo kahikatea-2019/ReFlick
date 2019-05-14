@@ -1,14 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
 export default function Header () {
   return (
-    <>
-      <h1 className="title">REFLICK</h1>
-      <div className='header-children'>
+    <div className="header">
+      <div className="title"> REFLICK </div>
+      <div className="nav" >
         <Link to ='/'>Create!</Link>
         <Link to ='/play'>Play!</Link>
       </div>
-    </>
+    </div>
   )
 }

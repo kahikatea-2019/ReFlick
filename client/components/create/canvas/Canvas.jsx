@@ -203,10 +203,11 @@ class Canvas extends React.Component {
   render () {
     const { canvasHeight, canvasWidth } = this.state
     return (
-      <React.Fragment>
-        <Col md="auto">
-          <div>
+      <div className="sheet">
+        <div className="sheet-content">
+          <div className="colLeft">
             <canvas
+              id="drawCanvas"
               ref="canvas"
               width={canvasWidth}
               height={canvasHeight}
@@ -214,18 +215,21 @@ class Canvas extends React.Component {
               onMouseMove={this.mouseMoveHandler}
               onMouseUp={this.mouseUpHandler}
               onMouseLeave={this.onMouseLeaveHandler} />
-          </div>
-        </Col>
-        <Col md="auto">
-          <Toolbar/>
-          <Button variant="outline-secondary" onClick={this.clearFrame}>
+            <div className="controls">
+              <Button variant="outline-secondary" onClick={this.clearFrame}>
           Clear
-          </Button>
-          <Button variant="outline-secondary" onClick={this.saveGame}>
+              </Button>
+              <Button variant="outline-secondary" onClick={this.saveGame}>
           Save
-          </Button>
-        </Col>
-      </React.Fragment>
+              </Button>
+            </div>
+          </div>
+
+          <div className="colRight">
+            <Toolbar/>
+          </div>
+        </div>
+      </div>
     )
   }
 }
