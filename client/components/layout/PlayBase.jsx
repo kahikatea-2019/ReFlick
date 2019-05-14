@@ -9,6 +9,12 @@ export default class Base extends React.Component {
     showGame: false,
     showList: true
   }
+  componentDidMount () {
+    this.setState({
+      showGame: false,
+      showList: true
+    })
+  }
 
   showGame = () => {
     this.setState({
