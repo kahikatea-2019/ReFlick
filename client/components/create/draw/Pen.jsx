@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { setBrushSize } from '../actions/index'
+import { setBrushSize } from '../../../actions/index'
 
 function Pen (props) {
   return (
