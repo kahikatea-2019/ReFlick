@@ -9,8 +9,13 @@ class PlayCanvas extends React.Component {
   state = {
     currentFrame: 1,
     colours: this.props.colours,
+    coloursArray: this.props.colours.map(colourObj => {
+      const { r, g, b, a } = colourObj
+      return [ r, g, b, a ]
+    }),
     canvasHeight: CANVAS_HEIGHT,
-    canvasWidth: CANVAS_WIDTH
+    canvasWidth: CANVAS_WIDTH,
+    clickableCursor: false
   }
 
   componentDidMount () {
@@ -31,11 +36,10 @@ class PlayCanvas extends React.Component {
         context.putImageData(this.state.frame1Img, 0, 0)
       })
   }
-  componentDidUpdate (nextProps) {
-    console.log(nextProps)
+  componentDidUpdate (prevProps) {
     const { canvasHeight, canvasWidth } = this.state
-    if (nextProps.id !== this.props.id) {
-      const nextId = nextProps.id
+    if (prevProps.id !== this.props.id) {
+      const nextId = prevProps.id
       getGameData(nextId)
         .then(game => {
           const frameIndices = [1, 2, 3, 4]
@@ -48,13 +52,10 @@ class PlayCanvas extends React.Component {
             })
           })
         })
-      // const context = this.refs.playcanvas.getContext('2d')
-      // context.putImageData(this.state.frame1Img, 0, 0)
     }
   }
 
   displayActiveFrame = () => {
-    console.log(this.state.currentFrame)
     const context = this.refs.playcanvas.getContext('2d')
     const frameImg = this.state[`frame${this.state.currentFrame}Img`]
     context.putImageData(frameImg, 0, 0)
@@ -64,36 +65,59 @@ class PlayCanvas extends React.Component {
     const { offsetX, offsetY } = e.nativeEvent
     const context = this.refs.playcanvas.getContext('2d')
     const pixelClicked = Array.from(context.getImageData(offsetX, offsetY, 1, 1).data)
+    this.checkPixelColour(pixelClicked, 'click')
+  }
 
-    const coloursArray = this.state.colours.map(colourObj => {
-      const { r, g, b, a } = colourObj
-      return [ r, g, b, a ]
-    })
+  mouseMoveHandler = e => {
+    const { offsetX, offsetY } = e.nativeEvent
+    const context = this.refs.playcanvas.getContext('2d')
+    const pixelClicked = Array.from(context.getImageData(offsetX, offsetY, 1, 1).data)
+    this.checkPixelColour(pixelClicked, 'move')
+  }
 
-    const checkPixelColour = (pixelClicked) => {
-      coloursArray.forEach((colour, i) => {
-        if (JSON.stringify(pixelClicked) === JSON.stringify(colour)) {
-          const colourId = this.state.colours[i].id
-          const frameMap = this.state[`frame${this.state.currentFrame}Map`]
-          const frameToSwitchTo = frameMap[`col${colourId}`]
+  checkPixelColour = (pixelClicked, action) => {
+    this.state.coloursArray.forEach((colour, i) => {
+      if (JSON.stringify(pixelClicked) === JSON.stringify(colour)) {
+        const colourId = this.state.colours[i].id
+        const frameMap = this.state[`frame${this.state.currentFrame}Map`]
+        const frameToSwitchTo = frameMap[`col${colourId}`]
+        // mouse move
+        if (action === 'move') {
+          if (frameToSwitchTo) {
+            this.setState({
+              clickableCursor: true
+            })
+          } else {
+            this.setState({
+              clickableCursor: false
+            })
+          }
+        }
+        // mouse click
+        if (action === 'click') {
           if (frameToSwitchTo) {
             this.setState({
               currentFrame: frameToSwitchTo
             }, this.displayActiveFrame)
           }
         }
-      })
-    }
-    checkPixelColour(pixelClicked)
+      }
+    })
   }
 
   render () {
-    const { canvasHeight, canvasWidth } = this.state
+    const { canvasHeight, canvasWidth, clickableCursor } = this.state
+    let style = {}
+    if (clickableCursor) {
+      style = { cursor: 'pointer' }
+    }
     return (
       <div id ="playcanvas">
         <div className="sheet">
           <canvas
+            style={style}
             onClick={this.clickHandler}
+            onMouseMove={this.mouseMoveHandler}
             ref="playcanvas"
             width={canvasWidth}
             height={canvasHeight}>
