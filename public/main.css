@@ -19,13 +19,25 @@
 
 .title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 4em;
- 
+  font-size: 3em;
+
+ }
+
+ @media (min-width: 768px) and (orientation: landscape) {
+  .title {
+    display: grid;
+    font-size: 5em;
+   
+  }
 }
+
+
+
 
 .nav {
   font-family: 'Press Start 2P', cursive;
   font-size: 18px;
+
 
 }
  
