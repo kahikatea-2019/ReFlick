@@ -17,7 +17,7 @@ class Colour extends React.Component {
     if (target !== prevProps.target) {
       {this.setState({frameMap: this.props.target})}
     }
-    else if (activeFrame !== prevProps.activeFrame) {
+    else if (activeFrame !== prevProps.activeFrame) {np
       {this.setState({frameMap: this.props.target})}
     }
   }
@@ -44,6 +44,12 @@ class Colour extends React.Component {
     )
   }
 
+  checkForZero() {
+    if(this.state.frameMap === 0) {
+      this.setState({frameMap: null})
+    }
+  }
+
   render () {
     const { colour, frames } = this.props
 
@@ -56,6 +62,7 @@ class Colour extends React.Component {
           </Dropdown.Toggle>
           <Dropdown.Menu >
             {this.returnDropdowns(colour, frames)}
+            {this.checkForZero()}
           </Dropdown.Menu>
         </Dropdown>
         <br/>
