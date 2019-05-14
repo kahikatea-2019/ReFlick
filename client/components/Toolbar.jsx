@@ -8,7 +8,7 @@ export default class Toolbar extends React.Component {
     return (
       <div className="Tools">
         <Colours/>
-        <Frames />
+        <Frames update={() => this.render()}/>
       </div>
     )
   }
