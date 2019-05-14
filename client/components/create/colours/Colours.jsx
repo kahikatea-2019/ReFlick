@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Colour from './Colour'
-import Pen from '../draw/Pen'
 
 class Colours extends React.Component {
   state = {
@@ -31,10 +30,9 @@ class Colours extends React.Component {
   render () {
     const { colours, frames } = this.props
     return (
-      <div>
-        <h2> Colours </h2>
+      <div className="colours">
+        <h4> Colours </h4>
         {this.renderColour(colours, frames)}
-        <Pen />
       </div>
     )
   }

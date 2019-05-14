@@ -1,17 +1,14 @@
 const request = require('supertest')
 
-const server = require('../server/server')
-const db = require('../server/db/games')
+const server = require('../../../server/server')
+const db = require('../../../server/db/games')
 
+jest.mock('../../../server/db/assessments')
 
-
-// jest.mock('../server/db/games')
-
-// beforeEach(() => {
-//   db.reset()
-//   jest.resetModules()
-// })
-
+beforeEach(() => {
+  db.reset()
+  jest.resetModules()
+})
 
 test('GET /games returns single game as JSON', () => {
   return request(server)
@@ -24,6 +21,15 @@ test('GET /games returns single game as JSON', () => {
 
 test('/api/v1/:id send back a 200 status', () => {
   request(server)
+    .get('/games/1')
+    .expect(200)
+    .then(res => {
+      expect(res.body.frame1Img).toHaveLength()
+    })
+})
+
+test('/games must send to db', () => {
+  request(server)
     .get('/assessments/:id')
     .expect(200)
     .then(res => {
@@ -31,11 +37,11 @@ test('/api/v1/:id send back a 200 status', () => {
     })
 })
 
-test('POST /games must send to db', () => {
+test('/games/:id sends back a 200 status', () => {
   request(server)
     .get('/assessments/:id')
     .expect(200)
     .then(res => {
-      expect(res.body.frame1Img).toHaveLength()
+      expect(res.body.name).toHaveLength()
     })
 })

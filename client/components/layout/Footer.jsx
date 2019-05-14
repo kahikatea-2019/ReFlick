@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function Footer() {
+export default function Footer () {
   return (
+
     <div className="footer">
-      <footer>About us</footer>
+      <footer> <br/> STRUDAWG </footer>
     </div>
   )
 }
