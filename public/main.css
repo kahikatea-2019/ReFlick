@@ -11,13 +11,16 @@
 
 /* /////////  HEADER  ////////// */
  .header { 
-  grid-row: 1;
-  padding: 30px;
+  /* grid-row: 1; */
+  padding: 20px;
+
+ 
 }
 
 .title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 58px;
+  font-size: 4em;
+ 
 }
 
 .nav {
@@ -98,7 +101,7 @@
   text-align: center;
 }
 
-/* COLOURS */
+/*///////// COLOURS ////////// */
 
 .colours {
   flex: 50%;
@@ -183,10 +186,6 @@ h4 {
   align-items: center;
   justify-content: space-around;
 }
-
-
-/* */
-
 
 
 button {
