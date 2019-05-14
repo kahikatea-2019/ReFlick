@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Colour from './Colour'
-// import { getGamesData } from '../../../actions'
 
+import Colour from './Colour'
 import Pen from '../draw/Pen'
 
 class Colours extends React.Component {
@@ -10,13 +9,12 @@ class Colours extends React.Component {
     targetFrames: this.props.targetFrames
   }
 
-  componentDidUpdate(prevProps) {
-    const {targetFrames, activeFrame} = this.props
-    if (targetFrames !== prevProps.targetFrames) {
-      {this.setState({targetFrames: this.props.targetFrames})}
-    }
+  componentDidUpdate (prevProps) {
+    const { activeFrame } = this.props
     if (activeFrame !== prevProps.activeFrame) {
-      {this.setState({targetFrames: this.props.targetFrames})}
+      this.setState({
+        targetFrames: this.props.targetFrames
+      })
     }
   }
 
@@ -24,9 +22,8 @@ class Colours extends React.Component {
     return (
       colours.map((colour, index) => {
         index = index + 1
-
-        return <Colour key={`rgb(${colour.r},${colour.g},${colour.b})`} colour={colour} frames={frames} 
-        target={this.state.targetFrames[`col${index}`]} update={() => this.render()}/>
+        return <Colour key={`rgb(${colour.r},${colour.g},${colour.b})`} colour={colour} frames={frames}
+          target={this.state.targetFrames[`col${index}`]} update={() => this.render()}/>
       })
     )
   }
