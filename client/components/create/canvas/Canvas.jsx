@@ -201,6 +201,7 @@ class Canvas extends React.Component {
 
   render () {
     const { canvasHeight, canvasWidth } = this.state
+    const { frame1Img, frame2Img, frame3Img, frame4Img } = this.state
     return (
       <React.Fragment>
         <Col md="auto">
@@ -216,7 +217,7 @@ class Canvas extends React.Component {
           </div>
         </Col>
         <Col md="auto">
-          <Toolbar/>
+          <Toolbar thumbnails={{ frame1Img, frame2Img, frame3Img, frame4Img }}/>
           <Button variant="outline-secondary" onClick={this.clearFrame}>
           Clear
           </Button>

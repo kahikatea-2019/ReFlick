@@ -11,7 +11,7 @@ export default class Toolbar extends React.Component {
 
       <Container>
       
-          <Col md="auto"><Frames /></Col>
+          <Col md="auto"><Frames thumbnails={this.props.thumbnails} /></Col>
           <Col md="auto"> <Colours/> </Col>
        
       </Container>

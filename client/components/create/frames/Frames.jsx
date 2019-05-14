@@ -3,20 +3,20 @@ import { connect } from 'react-redux'
 import Frame from './Frame'
 
 class Frames extends React.Component {
-  renderFrames (frames, dispatch) {
+  renderFrames (frames, dispatch, thumbnails) {
     return (
       frames.map(frame =>
-        <Frame key={frame.id} frame={frame.name} dispatch={dispatch} />
+        <Frame key={frame.id} frame={frame.name} dispatch={dispatch} thumbnail={thumbnails[`frame${frame.id}Img`]} />
       )
     )
   }
 
   render () {
-    const { frames } = this.props
+    const { frames, thumbnails } = this.props
     return (
       <div>
         <h2> Frames </h2>
-        {this.renderFrames(frames, this.props.dispatch)}
+        {this.renderFrames(frames, this.props.dispatch, thumbnails)}
       </div>
     )
   }

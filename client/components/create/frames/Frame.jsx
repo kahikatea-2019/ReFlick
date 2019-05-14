@@ -2,15 +2,46 @@ import React from 'react'
 import { setFrame } from '../../../actions'
 import { connect } from 'react-redux'
 
-function Frame (props) {
-  const { setFrame, frame } = props
-  return (
-    <div className="frame" onClick={() => setFrame(frame)}>
-      <p>{props.frame}</p>
-      <br/>
-    </div>
-  )
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../canvas/canvasSizeData'
+
+class Frame extends React.Component {
+
+  componentDidMount () {
+    this.updateThumbnail()
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.thumbnail !== this.props.thumbnail) {
+      this.updateThumbnail()
+      console.log('changed!')
+    }
+  }
+
+  updateThumbnail = () => {
+    const { thumbnail, frame } = this.props
+    console.log('updating', thumbnail)
+    const context = this.refs[`thumbnail${frame}`].getContext('2d')
+    console.log(context)
+    context.putImageData(thumbnail, 0, 0)
+    console.log(context.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT))
+  }
+
+  render () {
+    const { setFrame, frame } = this.props
+    return (
+      <div className="frame" onClick={() => setFrame(frame)}>
+        <p>{frame}</p>
+        <br/>
+        <canvas
+          ref={`thumbnail${frame}`}
+          width={CANVAS_WIDTH}
+          height={CANVAS_HEIGHT}>
+        </canvas>
+      </div>
+    )
+  }
 }
+
 
 function mapsStateToDispatch (dispatch) {
   return {
