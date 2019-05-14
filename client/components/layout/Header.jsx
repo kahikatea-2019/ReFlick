@@ -7,7 +7,7 @@ export default function Header () {
       <h1 className="title">REFLICK</h1>
       <div className='header-children'>
         <Link to ='/'>Create!</Link>
-        <Link to ='/play/1'>Play!</Link>
+        <Link to ='/play'>Play!</Link>
       </div>
     </>
   )
