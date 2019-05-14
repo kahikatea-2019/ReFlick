@@ -7,7 +7,7 @@ class Frames extends React.Component {
     return (
       frames.map(frame => {
         if (frame.name !== 'None') { // Speical case to avoid rendering frame 0 (dropdown frame)
-          return <Frame key={frame.id} frame={frame.name} dispatch={dispatch} />
+          return <Frame key={frame.id} frame={frame.name} dispatch={dispatch} update={() => this.props.update}/>
         }
       })
     )

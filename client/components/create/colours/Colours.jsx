@@ -6,17 +6,31 @@ import Colour from './Colour'
 import Pen from '../draw/Pen'
 
 class Colours extends React.Component {
+  state = {
+    targetFrames: this.props.targetFrames
+  }
+
+  componentDidUpdate(prevProps) {
+    const {targetFrames, activeFrame} = this.props
+    if (targetFrames !== prevProps.targetFrames) {
+      {this.setState({targetFrames: this.props.targetFrames})}
+    }
+    if (activeFrame !== prevProps.activeFrame) {
+      {this.setState({targetFrames: this.props.targetFrames})}
+    }
+  }
+
   renderColour (colours, frames) {
     return (
-      colours.map(colour =>
-        <Colour key={`rgb(${colour.r},${colour.g},${colour.b})`} colour={colour} frames={frames} />
-      )
+      colours.map((colour, index) => {
+        index = index + 1
+
+        return <Colour key={`rgb(${colour.r},${colour.g},${colour.b})`} colour={colour} frames={frames} 
+        target={this.state.targetFrames[`col${index}`]} update={() => this.render()}/>
+      })
     )
   }
 
-  componentDidMount () {
-    // return getGamesData(1)
-  }
   render () {
     const { colours, frames } = this.props
     return (
@@ -32,7 +46,9 @@ class Colours extends React.Component {
 function mapStateToProps (state) {
   return {
     colours: state.coloursReducer.colours,
-    frames: state.framesReducer
+    frames: state.framesReducer,
+    activeFrame: state.activeFrame,
+    targetFrames: state.framesReducer[state.activeFrame].map
   }
 }
 
