@@ -6,13 +6,10 @@ import Colours from './create/colours/Colours'
 export default class Toolbar extends React.Component {
   render () {
     return (
-
-      <React.Fragment>
-        <div> <Colours/> </div>
-        <div><Frames /></div>
-
-
-      </React.Fragment>
+      <div className="Tools">
+        <Colours/>
+        <Frames />
+      </div>
     )
   }
 }

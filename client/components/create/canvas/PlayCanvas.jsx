@@ -69,12 +69,14 @@ class PlayCanvas extends React.Component {
     const { canvasHeight, canvasWidth } = this.state
     return (
       <div id ="playcanvas">
-        <canvas
-          onClick={this.clickHandler}
-          ref="playcanvas"
-          width={canvasWidth}
-          height={canvasHeight}>
-        </canvas>
+        <div className="sheet">
+          <canvas
+            onClick={this.clickHandler}
+            ref="playcanvas"
+            width={canvasWidth}
+            height={canvasHeight}>
+          </canvas>
+        </div>
       </div>
     )
   }
