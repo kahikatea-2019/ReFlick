@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+
 import { Button } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
 
@@ -215,10 +216,10 @@ class Canvas extends React.Component {
               onMouseUp={this.mouseUpHandler}
               onMouseLeave={this.onMouseLeaveHandler} />
             <div className="controls">
-              <Button variant="outline-secondary" onClick={this.reset}>
+              <Button variant="outline-secondary" onClick={this.clearFrame}>
           Clear
               </Button>
-              <Button variant="outline-secondary" onClick={this.saveFrameImg}>
+              <Button variant="outline-secondary" onClick={this.saveGame}>
           Save
               </Button>
             </div>

@@ -4,7 +4,8 @@ const connection = require('knex')(config)
 
 module.exports = {
   getGame,
-  submitGame
+  submitGame,
+  getGameIds
 }
 
 // retrieve saved game so that user can play
@@ -14,6 +15,11 @@ function getGame (id, db = connection) {
     .where({ id: id })
     .select()
     .first()
+}
+
+function getGameIds (db = connection) {
+  return db('games')
+    .select('id')
 }
 
 // export button to submit to db once user has built game

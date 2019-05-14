@@ -1,11 +1,14 @@
 import React from 'react'
-import { setFrame } from '../../../actions'
-import { connect } from 'react-redux'
+import {setFrame} from '../../../actions'
+import {connect} from 'react-redux'
 
 function Frame (props) {
-  const { setFrame, frame } = props
+  const {setFrame, frame, update} = props
   return (
-    <div className="frame" onClick={() => setFrame(frame)}>
+    <div className="frame" onClick={() => {
+      setFrame(frame)
+      update()
+    }}>
       <p>{props.frame}</p>
       <br/>
     </div>

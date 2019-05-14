@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { Link } from 'react-router-dom'
 import { getGameData } from '../../../api/games'
 
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
@@ -31,8 +31,30 @@ class PlayCanvas extends React.Component {
         context.putImageData(this.state.frame1Img, 0, 0)
       })
   }
+  componentDidUpdate (nextProps) {
+    console.log(nextProps)
+    const { canvasHeight, canvasWidth } = this.state
+    if (nextProps.id !== this.props.id) {
+      const nextId = nextProps.id
+      getGameData(nextId)
+        .then(game => {
+          const frameIndices = [1, 2, 3, 4]
+          frameIndices.forEach(i => {
+            const clampedArray = Uint8ClampedArray.from(game[`frame${i}Img`].data)
+            const imageData = new ImageData(clampedArray, canvasWidth, canvasHeight)
+            this.setState({
+              [`frame${i}Img`]: imageData,
+              [`frame${i}Map`]: JSON.parse(game[`frame${i}Map`])
+            })
+          })
+        })
+      // const context = this.refs.playcanvas.getContext('2d')
+      // context.putImageData(this.state.frame1Img, 0, 0)
+    }
+  }
 
   displayActiveFrame = () => {
+    console.log(this.state.currentFrame)
     const context = this.refs.playcanvas.getContext('2d')
     const frameImg = this.state[`frame${this.state.currentFrame}Img`]
     context.putImageData(frameImg, 0, 0)
@@ -76,6 +98,7 @@ class PlayCanvas extends React.Component {
             width={canvasWidth}
             height={canvasHeight}>
           </canvas>
+          <Link to ='/play'><button onClick={this.props.showList}>Back to list</button></Link>
         </div>
       </div>
     )
