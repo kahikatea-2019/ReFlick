@@ -13,17 +13,18 @@ export default function App () {
   return (
     <Router>
       <Container>
-      
-          <Row className="header" ><Header/></Row>
-          <Row className="sheet">
 
-            <Switch>
-              <Route exact path='/' component={Base} />
-              <Route path='/play/:id' component={PlayBase} />
-            </Switch>
-          </Row>
-          <Row><Footer/></Row>
-      
+        <Row className="header" ><Header/></Row>
+        <Row className="sheet">
+
+          <Switch>
+            <Route exact path='/' component={Base} />
+            <Route exact path='/play' component={PlayBase} />
+            <Route path='/play/:id' component={PlayBase} />
+          </Switch>
+        </Row>
+        <Row><Footer/></Row>
+
       </Container>
     </Router>
   )
