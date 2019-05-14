@@ -1,5 +1,11 @@
 import request from 'superagent'
 
+export function getGameIds () {
+  return request
+    .get('/api/v1/games')
+    .then(res => res.body)
+}
+
 export function getGameData (id) {
   return request
     .get(`/api/v1/games/${id}`)

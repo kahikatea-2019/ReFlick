@@ -8,6 +8,11 @@ const db = require('../db/games')
 
 router.use(formidableMiddleware())
 
+router.get('/', (req, res) => {
+  db.getGameIds()
+    .then(id => res.send(id))
+    .catch(err => res.status(500).send(err.message))
+})
 // Save game to db
 router.post('/', (req, res) => {
   // Using formidable so structure of req is different now
