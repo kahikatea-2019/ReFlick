@@ -8,7 +8,7 @@ export default function Header () {
       <div className="title"> REFLICK </div>
       <div className="nav" >
         <Link to ='/'>Create!</Link>
-        <Link to ='/play/1'>Play!</Link>
+        <Link to ='/play'>Play!</Link>
       </div>
     </div>
   )

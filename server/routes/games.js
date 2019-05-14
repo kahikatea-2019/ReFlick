@@ -8,6 +8,11 @@ const db = require('../db/games')
 
 router.use(formidableMiddleware())
 
+router.get('/', (req, res) => {
+  db.getGameIds()
+    .then(id => res.send(id))
+    .catch(err => res.status(500).send(err.message))
+})
 // Save game to db
 router.post('/', (req, res) => {
   // Using formidable so structure of req is different now
@@ -20,7 +25,7 @@ router.post('/', (req, res) => {
   const frame4Img = fs.readFileSync(req.files.frame4Img.path)
   db.submitGame(frame1Img, frame1Map, frame2Img, frame2Map, frame3Img, frame3Map, frame4Img, frame4Map)
     .then(() => { res.send('ok') })
-    .catch(err => res.status(500).send(err.message))
+    .catch(err => console.log(err))
 })
 
 // Get game from db
@@ -31,7 +36,7 @@ router.get('/:id', (req, res) => {
       res.send(game)
     })
     .catch(err => {
-      res.status(500).send(err.message)
+      console.log(err)
     })
 })
 
