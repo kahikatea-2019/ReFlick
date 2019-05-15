@@ -5,6 +5,13 @@ export const SET_BRUSH_COLOUR = 'SET_BRUSH_COLOUR'
 export const SET_BRUSH_SIZE = 'SET_BRUSH_SIZE'
 export const UPDATE_FRAME_IMAGE = 'UPDATE_FRAME_IMAGE'
 export const UPDATE_FRAME_MAP = 'UPDATE_FRAME_MAP'
+export const RESET_FRAMES = 'RESET_FRAMES'
+
+export const resetFrames = () => {
+  return {
+    type: RESET_FRAMES
+  }
+}
 
 export const getColours = (colours) => {
   return {
@@ -12,6 +19,7 @@ export const getColours = (colours) => {
     colours
   }
 }
+
 export const getFrames = () => {
   return {
     type: GET_FRAMES

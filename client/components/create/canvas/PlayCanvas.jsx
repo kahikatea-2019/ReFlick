@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getGameData } from '../../../api/games'
+import { Button } from 'react-bootstrap'
 
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
 
@@ -115,6 +116,7 @@ class PlayCanvas extends React.Component {
       <div id ="playcanvas">
         <div className="sheet">
           <canvas
+            className="play-canvas"
             style={style}
             onClick={this.clickHandler}
             onMouseMove={this.mouseMoveHandler}
@@ -122,7 +124,10 @@ class PlayCanvas extends React.Component {
             width={canvasWidth}
             height={canvasHeight}>
           </canvas>
-          <Link to ='/play'><button onClick={this.props.showList}>Back to list</button></Link>
+          <br/>
+          <div className="controls">
+            <Link to ='/play'><Button variant="outline-secondary" onClick={this.props.showList}>Back to list</Button></Link>
+          </div>
         </div>
       </div>
     )

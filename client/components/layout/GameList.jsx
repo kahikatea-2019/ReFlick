@@ -19,10 +19,11 @@ export default class GameList extends Component {
   }
 
   render () {
+    const reversedArray = this.state.Ids.reverse()
     return (
       <div>
         <ul>
-          {this.state.Ids.map(id =>
+          {reversedArray.map(id =>
             <li key={id.id}>
               <Link to ={`/play/${id.id}`} onClick={this.props.showGame}>{id.id}</Link>
             </li>)}

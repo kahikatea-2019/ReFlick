@@ -231,6 +231,10 @@
     margin-bottom: 2px;
   }
 
+  .list-button {
+    width: 3rem;
+  }
+
   .pens h4 { 
     /* Removing title for pens at lower screen sizes*/
     opacity: 0;
@@ -328,6 +332,9 @@ h4 {
   height: 60px;
   border: .2px solid lightgrey;
   margin-bottom: 20px;
+  font-size: 32px;
+  font-family: 'Press Start 2P', cursive;
+  align-content: center;
 }
 
 .frames {
@@ -336,6 +343,10 @@ h4 {
   align-items: center;
 }
 
+.saved {
+  font-size: 32px;
+  font-family: 'Press Start 2P', cursive;
+}
 .pens {
   display: flex;
   flex-direction: column;
