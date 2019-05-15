@@ -283,6 +283,10 @@
     margin-top: 13px;
     margin-left: 20px;
   }
+
+  .sheet{
+    height: 120vh;
+  }
 }
 
 /*///////// COLOURS ////////// */
