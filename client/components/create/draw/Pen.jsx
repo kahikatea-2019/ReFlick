@@ -8,11 +8,19 @@ function Pen (props) {
     <>
       <div className="pens">
         <h4>Pen Tools</h4>
-
-        <button className='sbutton' onClick={props.smallPen}></button>
-        <button className='mbutton'onClick={props.medPen}></button>
-        <button className='lbutton' onClick={props.largePen}></button>
-        <button className='fill-bucket' onClick={props.fill}></button>
+        <button className='sbutton' onClick={() => {
+          props.smallPen()
+          props.fillOff()
+        }}></button>
+        <button className='mbutton'onClick={() => {
+          props.medPen()
+          props.fillOff()
+        }}></button>
+        <button className='lbutton' onClick={() => {
+          props.largePen()
+          props.fillOff()
+        }}></button>
+        <button className='fill-bucket' onClick={props.fillOn}></button>
       </div>
     </>
   )
@@ -24,9 +32,9 @@ const mapStateToProps = state => (
 
 function mapStateToDispatch (dispatch) {
   return {
-    smallPen: () => dispatch(setBrushSize(10)),
-    medPen: () => dispatch(setBrushSize(20)),
-    largePen: () => dispatch(setBrushSize(30))
+    smallPen: () => dispatch(setBrushSize(20)),
+    medPen: () => dispatch(setBrushSize(40)),
+    largePen: () => dispatch(setBrushSize(60))
   }
 }
 

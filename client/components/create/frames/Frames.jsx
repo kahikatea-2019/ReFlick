@@ -25,7 +25,7 @@ class Frames extends React.Component {
           <br/>
         </div>
 
-        <Pen fill={this.props.fill}/>
+        <Pen fillOn={this.props.fillOn} fillOff={this.props.fillOff}/>
       </div>
     )
   }
