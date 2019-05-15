@@ -160,10 +160,11 @@ class Canvas extends React.Component {
   }
 
   saveGame = () => {
-    const frame1Map = this.props.frames[0].map
-    const frame2Map = this.props.frames[1].map
-    const frame3Map = this.props.frames[2].map
-    const frame4Map = this.props.frames[3].map
+    // frames[0] is the null frame
+    const frame1Map = this.props.frames[1].map
+    const frame2Map = this.props.frames[2].map
+    const frame3Map = this.props.frames[3].map
+    const frame4Map = this.props.frames[4].map
     const { frame1Img, frame2Img, frame3Img, frame4Img } = this.state
     const frame1Blob = new Blob([frame1Img.data.buffer])
     const frame2Blob = new Blob([frame2Img.data.buffer])
