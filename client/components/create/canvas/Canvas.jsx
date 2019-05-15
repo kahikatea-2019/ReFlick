@@ -7,7 +7,7 @@ import Toolbar from '../../Toolbar'
 
 import { submitGame } from '../../../api/games'
 
-import { resetFrames } from '../../../actions/index'
+import { resetFrames, setFrame } from '../../../actions/index'
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
 
 class Canvas extends React.Component {
@@ -198,6 +198,9 @@ class Canvas extends React.Component {
       isSaved: true
     })
     this.props.resetFrames()
+    this.initCanvas()
+    this.displayActiveFrame()
+    this.props.resetActiveFrame()
     setTimeout(() => this.setState({ isSaved: false }), 2000)
   }
 
@@ -292,7 +295,8 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => {
   return {
-    resetFrames: () => dispatch(resetFrames())
+    resetFrames: () => dispatch(resetFrames()),
+    resetActiveFrame: () => dispatch(setFrame(1))
   }
 }
 

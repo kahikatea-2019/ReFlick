@@ -113,20 +113,22 @@ class PlayCanvas extends React.Component {
       style = { cursor: 'pointer' }
     }
     return (
-      <div id ="playcanvas">
-        <div className="sheet">
-          <canvas
-            className="play-canvas"
-            style={style}
-            onClick={this.clickHandler}
-            onMouseMove={this.mouseMoveHandler}
-            ref="playcanvas"
-            width={canvasWidth}
-            height={canvasHeight}>
-          </canvas>
-          <br/>
-          <div className="controls">
-            <Link to ='/play'><Button variant="outline-secondary" onClick={this.props.showList}>Back to list</Button></Link>
+      <div className="playContainer">
+        <div id ="playcanvas">
+          <div className="sheet">
+            <canvas
+              className="play-canvas"
+              style={style}
+              onClick={this.clickHandler}
+              onMouseMove={this.mouseMoveHandler}
+              ref="playcanvas"
+              width={canvasWidth}
+              height={canvasHeight}>
+            </canvas>
+            <br/>
+            <div className="controls">
+              <Link to ='/play'><Button variant="outline-secondary" onClick={this.props.showList}>Back to list</Button></Link>
+            </div>
           </div>
         </div>
       </div>
