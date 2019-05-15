@@ -5,7 +5,7 @@
 .page {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
+  min-height: 80vh;
   background-color: aliceblue;
 }
 
@@ -22,18 +22,18 @@
 
  }
 
- @media (min-width: 1025px) and (orientation: landscape) {
+ @media (min-width: 1367px) and (orientation: landscape) {
   .title {
     display: grid;
-    font-size: 5em;
+    font-size: 4em;
    
   }
 }
 
-@media (min-width: 1367px) and (orientation: landscape) {
+ @media (min-width: 1025px) and (orientation: landscape) {
   .title {
     display: grid;
-    font-size: 4em;
+    font-size: 5em;
    
   }
 }
@@ -58,6 +58,7 @@
 .content {
   grid-row: 2;
   width: 100%;
+  background-color: aliceblue;
 }
 
 /* ////// WHITE FLOATING SHEET //////  */
