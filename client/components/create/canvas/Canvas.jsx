@@ -2,14 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { Button } from 'react-bootstrap'
-import { Col } from 'react-bootstrap'
 
 import Toolbar from '../../Toolbar'
 
 import { submitGame } from '../../../api/games'
 
+import { resetFrames } from '../../../actions/index'
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
-import { thisTypeAnnotation } from '@babel/types'
 
 class Canvas extends React.Component {
   state = {
@@ -25,7 +24,8 @@ class Canvas extends React.Component {
     canvasWidth: CANVAS_WIDTH,
     prevPos: [null, null],
     cursor: 'paint', // paint or fill
-    fill: false
+    fill: false,
+    isSaved: false
   }
 
   componentDidMount () {
@@ -194,6 +194,11 @@ class Canvas extends React.Component {
     const frame3Blob = new Blob([frame3Img.data.buffer])
     const frame4Blob = new Blob([frame4Img.data.buffer])
     submitGame({ frame1Blob, frame1Map, frame2Blob, frame2Map, frame3Blob, frame3Map, frame4Blob, frame4Map })
+    this.setState({
+      isSaved: true
+    })
+    this.props.resetFrames()
+    setTimeout(() => this.setState({ isSaved: false }), 2000)
   }
 
   clearFrame = e => {
@@ -262,7 +267,9 @@ class Canvas extends React.Component {
               <Button variant="outline-secondary" onClick={this.saveGame}>
           Save
               </Button>
+              <br/>
             </div>
+            {this.state.isSaved && <span className='saved'>Saved!</span>}
           </div>
 
           <div className="colRight">
@@ -283,4 +290,10 @@ const mapStateToProps = state => (
   }
 )
 
-export default connect(mapStateToProps)(Canvas)
+const mapDispatchToProps = dispatch => {
+  return {
+    resetFrames: () => dispatch(resetFrames())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Canvas)

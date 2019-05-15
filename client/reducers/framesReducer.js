@@ -1,4 +1,4 @@
-import { GET_FRAMES, UPDATE_FRAME_IMAGE, UPDATE_FRAME_MAP } from '../actions/index'
+import { GET_FRAMES, UPDATE_FRAME_IMAGE, UPDATE_FRAME_MAP, RESET_FRAMES } from '../actions/index'
 
 const initialFrames = [
   { id: 0, name: 'None', map: { col1: null, col2: null, col3: null, col4: null, col5: null, col6: null, col7: null, col8: null, col9: null } }, // Special frame for dropdowns
@@ -28,7 +28,8 @@ function framesReducer (frames = initialFrames, action) {
         }
         return frame
       })
-
+    case RESET_FRAMES:
+      return initialFrames
     default:
       return frames
   }
