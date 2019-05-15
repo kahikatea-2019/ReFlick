@@ -30,7 +30,16 @@ class Canvas extends React.Component {
 
   componentDidMount () {
     this.initCanvas()
+    this.thumbnailtest()
   }
+
+  thumbnailtest = () => {
+    const thumbnail = this.state.frame1Img
+    const context = this.refs['canvas2'].getContext('2d')
+    context.putImageData(thumbnail, 0, 0)
+    console.log('read test', context.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT))
+  }
+
 
   componentDidUpdate (prevProps) {
     if (prevProps.brushColour !== this.props.brushColour) {
@@ -256,6 +265,11 @@ class Canvas extends React.Component {
               onMouseMove={this.mouseMoveHandler}
               onMouseUp={this.mouseUpHandler}
               onMouseLeave={this.onMouseLeaveHandler} />
+            <canvas
+              ref="canvas2"
+              width={canvasWidth}
+              height={canvasHeight}
+            />
             <div className="controls">
               <Button variant="outline-secondary" onClick={this.clearFrame}>
           Clear
