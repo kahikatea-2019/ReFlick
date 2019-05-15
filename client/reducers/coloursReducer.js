@@ -70,7 +70,7 @@ const initialState = {
 function coloursReducer (state = initialState, action) {
   switch (action.type) {
     case GET_COLOURS:
-      return action.colours
+      return state
     default:
       return state
   }
