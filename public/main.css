@@ -219,6 +219,10 @@
     flex-direction: row!important;
   }
 
+  .pens button{
+    color: buttontext;
+  }
+
   .footer {
     margin-top: 25px;
     padding-top: none;
