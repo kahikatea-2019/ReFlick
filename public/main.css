@@ -476,3 +476,8 @@ a {
 #drawCanvas {
   z-index: 99!important;
 }
+
+.play-canvas {
+  margin-left: 120px;
+  margin-top: 20px;
+}

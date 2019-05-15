@@ -110,7 +110,7 @@ class PlayCanvas extends React.Component {
     const { canvasHeight, canvasWidth, clickableCursor } = this.state
     let style = {}
     if (clickableCursor) {
-      style = { cursor: 'pointer' }
+      style = { cursor: 'pointer'}
     }
     return (
       <div className="playContainer">
@@ -127,7 +127,7 @@ class PlayCanvas extends React.Component {
             </canvas>
             <br/>
             <div className="controls">
-              <Link to ='/play'><Button variant="outline-secondary" onClick={this.props.showList}>Back to list</Button></Link>
+              <Link to ='/play'><Button variant="outline-secondary" style={{ marginLeft: '1.78vw' }}onClick={this.props.showList}>Back to list</Button></Link>
             </div>
           </div>
         </div>
