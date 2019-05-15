@@ -11,18 +11,37 @@
 
 /* /////////  HEADER  ////////// */
  .header { 
-  grid-row: 1;
-  padding: 30px;
+  /* grid-row: 1; */
+  padding: 20px;
+
 }
 
 .title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 58px;
+  font-size: 3em;
+
+ }
+
+ @media (min-width: 1025px) and (orientation: landscape) {
+  .title {
+    display: grid;
+    font-size: 5em;
+   
+  }
+}
+
+@media (min-width: 1367px) and (orientation: landscape) {
+  .title {
+    display: grid;
+    font-size: 4em;
+   
+  }
 }
 
 .nav {
   font-family: 'Press Start 2P', cursive;
   font-size: 18px;
+
 
 }
  
@@ -49,7 +68,7 @@
   background-color: white;
   height: 110vh;
   box-shadow: 4px 4px 2.5px 0px rgba(0,0,0,0.4); 
-  width: 80%;
+  width: 75%;
 }
 
 .sheet-content {
@@ -90,6 +109,10 @@
 /* /////////// TOOLBAR ////////////// */
 
 @media only screen and (max-width: 768px) {
+  body {
+    background-color: aliceblue;
+  }
+
   .title {
     font-size: 28px;
   }
@@ -100,6 +123,7 @@
   }
 
   .sheet-content {
+    transition: width 0.4s;
     background-color: white;
     width: 650px;
     box-shadow: 5px 5px 5px;
@@ -224,6 +248,7 @@
   }
 
   .footer {
+    opacity: 0;
     margin-top: 25px;
     padding-top: none;
     padding-bottom: 15px;
@@ -236,7 +261,7 @@
   text-align: center;
 }
 
-/* COLOURS */
+/*///////// COLOURS ////////// */
 
 .colours {
   flex: 50%;
@@ -325,6 +350,7 @@ button {
 
 
 .sbutton {
+  background-color: rgb(104, 102, 102);
   align-items: center;
   justify-content: center;
   width: 1rem;
@@ -335,6 +361,7 @@ button {
 }
 
 .mbutton {
+  background-color: rgb(104, 102, 102);
   align-items: center;
   justify-content: center;
   width: 2rem;
@@ -344,11 +371,20 @@ button {
 }
 
 .lbutton {
+  background-color: rgb(104, 102, 102);
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
   margin-bottom: 2px;
 }
+/* . {
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 3px;
+
+} */
 
 a {
    color: black;
@@ -356,3 +392,13 @@ a {
    margin-right: 15px;
 }
 
+ .fill-bucket {
+  background-image: url('images/fillbucket.png');
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 3px;
+  border: 0;
+}
