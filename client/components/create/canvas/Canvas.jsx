@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-
 import { Button } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
 
@@ -80,6 +79,12 @@ class Canvas extends React.Component {
     const frameImg = this.state[`frame${this.state.activeFrame}Img`]
     this.paintPixels(frameImg, x, y, isDragged)
     this.displayActiveFrame()
+  }
+
+  fill = () => {
+    const frameImg = this.state[`frame${this.state.activeFrame}Img`]
+    const { r, g, b, a } = this.state.brushColour
+    this.setBackground(frameImg, r, g, b, a)
   }
 
   paintPixels (imageData, xClick, yClick, isDragged) {
@@ -226,7 +231,7 @@ class Canvas extends React.Component {
           </div>
 
           <div className="colRight">
-            <Toolbar/>
+            <Toolbar fill={this.fill}/>
           </div>
         </div>
       </div>

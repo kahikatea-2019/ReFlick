@@ -197,6 +197,7 @@ button {
 
 
 .sbutton {
+  background-color: rgb(104, 102, 102);
   align-items: center;
   justify-content: center;
   width: 1rem;
@@ -206,6 +207,7 @@ button {
 
 }
 .mbutton {
+  background-color: rgb(104, 102, 102);
   align-items: center;
   justify-content: center;
   width: 2rem;
@@ -214,13 +216,32 @@ button {
   margin-bottom: 3px;
 }
 .lbutton {
+  background-color: rgb(104, 102, 102);
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
   margin-bottom: 2px;
 }
+/* . {
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 3px;
+
+} */
 
  a {
    color: black;
  }
 
+ .fill-bucket {
+  background-image: url('images/images.png');
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 3px;
+  border: 0;
+}
