@@ -1,67 +1,142 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
-button {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
+/* PAGE */
+
+.page {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  background-color: aliceblue;
 }
 
-.dot {
-  width: 2rem;
-  height: 2rem;
-  border: 1px #ccc solid;
-  border-radius: 50%;
-}
+/* /////////  HEADER  ////////// */
+ .header { 
+  /* grid-row: 1; */
+  padding: 20px;
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
 }
 
 .title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 55px;
-  display: inline-block;
-  position: relative;
-  top: 5.85vh;
-  right: 31vw;
-  z-index: 1;
+  font-size: 3em;
+
+ }
+
+ @media (min-width: 1025px) and (orientation: landscape) {
+  .title {
+    display: grid;
+    font-size: 5em;
+   
+  }
 }
 
-.header-children {
-  margin: 5px;
-}
-
-.sbutton {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-}
-.lbutton {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
+@media (min-width: 1367px) and (orientation: landscape) {
+  .title {
+    display: grid;
+    font-size: 4em;
+   
+  }
 }
 
 
-/* .canvas {
-  margin-top: 50px;
-  padding: 50px;
-  border: .2px solid black;
-} */
 
-.frame {
-  align-content: center;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  border: .2px solid black;
+
+
+
+
+
+.nav {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 18px;
+
+
+}
+ 
+/* /////// FOOTER ///////// */
+
+.footer {
+  grid-row: 3;
+  padding: 30px;
+  text-align: center;
+}
+
+/* CONTENT */
+
+.content {
+  grid-row: 2;
+  width: 100%;
+}
+
+/* ////// WHITE FLOATING SHEET //////  */
+
+.sheet {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  height: 110vh;
+  box-shadow: 4px 4px 2.5px 0px rgba(0,0,0,0.4); 
+  width: 75%;
+}
+
+.sheet-content {
+  padding: 5% 3% 5% 3%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+  .sheet-content {
+    display: grid;
+    grid-template-columns: 60% 40%;
+  }
+}
+
+/* //////  colLeft is canvas AND BUTTONS//////  */
+
+.colLeft{
+  flex: 1;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#drawCanvas {
+}
+
+/* //// buttons under canvas ////// */
+
+.controls {
+  display: flex;
+  justify-content: center;
+}
+
+
+/* //////  CANVAS RIGHT TOOLBAR //////  */
+
+.colRight{
+  flex: 1;
+}
+
+/* /////////// TOOLBAR ////////////// */
+
+.Tools {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+/*///////// COLOURS ////////// */
+
+.colours {
+  flex: 50%;
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+
 }
 
 .dropdown{
   display: flex;
+  justify-content: center;
 }
 
 .colour {
@@ -69,6 +144,10 @@ button {
   cursor: pointer;
   border-radius: 2.5px;
   z-index: 0;
+}
+
+.colour:hover {
+  opacity: 0.7;
 }
 
 .framePick {
@@ -82,9 +161,6 @@ button {
   font-size: 10px;
 }
 
-.colour:hover {
-  opacity: 0.7;
-}
 
 .frameSpan {
   top: 34.5px;
@@ -94,20 +170,100 @@ button {
   height: 0; 
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid #f00;
+  border-top: 10px solid lightgrey;
 }
 
- #app {
-   background-color: rgba(179, 215, 236, 1);
-   height: 92vh;
+
+h4 {
+  font-family: 'Press Start 2P', cursive;
+  padding-bottom: 10px;
  }
 
- .sheet {
-  background-color: white;
-  padding-left: 10vw;
-  padding-right: 10vw; //fix
-  height: 110vh;
-  box-shadow: 4px 4px 2.5px 0px rgba(0,0,0,0.4); 
-} 
+
+ 
+/* FRAMES */
+
+.frames-pen {
+  flex: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.frame {
+  cursor: pointer;
+  width: 84px;
+  height: 60px;
+  border: .2px solid lightgrey;
+  margin-bottom: 20px;
+}
+
+.frames {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pens {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
 
 
+button {
+  width: 4.1rem;
+  height: 4.1rem;
+  border-radius: 50%;
+}
+
+
+.sbutton {
+  background-color: rgb(104, 102, 102);
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  margin-bottom: 3px;
+
+}
+.mbutton {
+  background-color: rgb(104, 102, 102);
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-bottom: 3px;
+}
+.lbutton {
+  background-color: rgb(104, 102, 102);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  margin-bottom: 2px;
+}
+/* . {
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 3px;
+
+} */
+
+ a {
+   color: black;
+ }
+
+ .fill-bucket {
+  background-image: url('images/images.png');
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 3px;
+  border: 0;
+}

@@ -6,13 +6,21 @@ import { setBrushSize } from '../../../actions/index'
 function Pen (props) {
   return (
     <>
-      <h3>Pens</h3>
-      <button className='sbutton' onClick={props.smallPen}></button>
-      <button className='mbutton'onClick={props.medPen}></button>
-      <button className='lbutton' onClick={props.largePen}></button>
+      <div className="pens">
+        <h4>Pen Tools</h4>
+
+        <button className='sbutton' onClick={props.smallPen}></button>
+        <button className='mbutton'onClick={props.medPen}></button>
+        <button className='lbutton' onClick={props.largePen}></button>
+        <button className='fill-bucket' onClick={props.fill}></button>
+      </div>
     </>
   )
 }
+const mapStateToProps = state => (
+  {
+    brushColour: state.brush.colour
+  })
 
 function mapStateToDispatch (dispatch) {
   return {
@@ -22,4 +30,4 @@ function mapStateToDispatch (dispatch) {
   }
 }
 
-export default connect(null, mapStateToDispatch)(Pen)
+export default connect(mapStateToProps, mapStateToDispatch)(Pen)

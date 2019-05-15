@@ -1,6 +1,6 @@
 import React from 'react'
-import { setFrame } from '../../../actions'
-import { connect } from 'react-redux'
+import {setFrame} from '../../../actions'
+import {connect} from 'react-redux'
 
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../canvas/canvasSizeData'
 
@@ -27,9 +27,12 @@ class Frame extends React.Component {
   }
 
   render () {
-    const { setFrame, frame } = this.props
+    const { setFrame, frame, update } = this.props
     return (
-      <div className="frame" onClick={() => setFrame(frame)}>
+      <div className="frame" onClick={() => {
+        setFrame(frame)
+        update()
+      }}>
         <p>{frame}</p>
         <br/>
         <canvas

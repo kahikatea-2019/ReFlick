@@ -81,6 +81,12 @@ class Canvas extends React.Component {
     this.displayActiveFrame()
   }
 
+  fill = () => {
+    const frameImg = this.state[`frame${this.state.activeFrame}Img`]
+    const { r, g, b, a } = this.state.brushColour
+    this.setBackground(frameImg, r, g, b, a)
+  }
+
   paintPixels (imageData, xClick, yClick, isDragged) {
     const { brushSize } = this.state
     const { r, g, b, a } = this.state.brushColour
@@ -154,10 +160,11 @@ class Canvas extends React.Component {
   }
 
   saveGame = () => {
-    const frame1Map = this.props.frames[0].map
-    const frame2Map = this.props.frames[1].map
-    const frame3Map = this.props.frames[2].map
-    const frame4Map = this.props.frames[3].map
+    // frames[0] is the null frame
+    const frame1Map = this.props.frames[1].map
+    const frame2Map = this.props.frames[2].map
+    const frame3Map = this.props.frames[3].map
+    const frame4Map = this.props.frames[4].map
     const { frame1Img, frame2Img, frame3Img, frame4Img } = this.state
     const frame1Blob = new Blob([frame1Img.data.buffer])
     const frame2Blob = new Blob([frame2Img.data.buffer])
@@ -203,10 +210,11 @@ class Canvas extends React.Component {
     const { canvasHeight, canvasWidth } = this.state
     const { frame1Img, frame2Img, frame3Img, frame4Img } = this.state
     return (
-      <React.Fragment>
-        <Col md="auto">
-          <div>
+      <div className="sheet">
+        <div className="sheet-content">
+          <div className="colLeft">
             <canvas
+              id="drawCanvas"
               ref="canvas"
               width={canvasWidth}
               height={canvasHeight}
@@ -214,18 +222,21 @@ class Canvas extends React.Component {
               onMouseMove={this.mouseMoveHandler}
               onMouseUp={this.mouseUpHandler}
               onMouseLeave={this.onMouseLeaveHandler} />
-          </div>
-        </Col>
-        <Col md="auto">
-          <Toolbar thumbnails={{ frame1Img, frame2Img, frame3Img, frame4Img }}/>
-          <Button variant="outline-secondary" onClick={this.clearFrame}>
+            <div className="controls">
+              <Button variant="outline-secondary" onClick={this.clearFrame}>
           Clear
-          </Button>
-          <Button variant="outline-secondary" onClick={this.saveGame}>
+              </Button>
+              <Button variant="outline-secondary" onClick={this.saveGame} >
           Save
-          </Button>
-        </Col>
-      </React.Fragment>
+              </Button>
+            </div>
+          </div>
+
+          <div className="colRight">
+            <Toolbar fill={this.fill} thumbnails={{ frame1Img, frame2Img, frame3Img, frame4Img }}/>
+          </div>
+        </div>
+      </div>
     )
   }
 }
