@@ -12,7 +12,8 @@ test('getGameData returns game data', () => {
 
   getGameData(1)
     .then((game) => {
-      // todo: this code never runs
+      // tested api route with nock, nocker, superagent-mocker
+      // issue with testing with superagent
       console.log(game)
       expect(game).toHaveProperty('ok', false)
     })
