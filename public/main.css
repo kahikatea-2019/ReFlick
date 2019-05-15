@@ -5,7 +5,7 @@
 .page {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
+  min-height: 80vh;
   background-color: aliceblue;
 }
 
@@ -65,6 +65,7 @@
 .content {
   grid-row: 2;
   width: 100%;
+  background-color: aliceblue;
 }
 
 /* ////// WHITE FLOATING SHEET //////  */
