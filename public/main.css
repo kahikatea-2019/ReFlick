@@ -22,18 +22,18 @@
 
  }
 
- @media (min-width: 1025px) and (orientation: landscape) {
+ @media (min-width: 1367px) and (orientation: landscape) {
   .title {
     display: grid;
-    font-size: 5em;
+    font-size: 4em;
    
   }
 }
 
-@media (min-width: 1367px) and (orientation: landscape) {
+ @media (min-width: 1025px) and (orientation: landscape) {
   .title {
     display: grid;
-    font-size: 4em;
+    font-size: 5em;
    
   }
 }
