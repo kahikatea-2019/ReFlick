@@ -108,7 +108,7 @@
 
 /* /////////// TOOLBAR ////////////// */
 
-
+/* Mobile & Tablet Display */
 @media only screen and (max-width: 768px) {
   
   body {
@@ -261,6 +261,28 @@
   display: flex;
   flex-direction: row;
   text-align: center;
+}
+ 
+/* Smaller Laptops */
+@media only screen and (max-width: 1366px) {
+  
+ .Tools {
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-right: 1vw;
+    padding-left: 1vw;
+    width: 100%;
+  }
+
+  .colours {
+    margin-left: 40px;
+    margin-right: 5px;
+  }
+
+  .frames { 
+    margin-top: 13px;
+    margin-left: 20px;
+  }
 }
 
 /*///////// COLOURS ////////// */
