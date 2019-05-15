@@ -14,7 +14,6 @@
   /* grid-row: 1; */
   padding: 20px;
 
- 
 }
 
 .title {
@@ -23,13 +22,25 @@
 
  }
 
- @media (min-width: 768px) and (orientation: landscape) {
+ @media (min-width: 1025px) and (orientation: landscape) {
   .title {
     display: grid;
     font-size: 5em;
    
   }
 }
+
+@media (min-width: 1367px) and (orientation: landscape) {
+  .title {
+    display: grid;
+    font-size: 4em;
+   
+  }
+}
+
+
+
+
 
 
 
@@ -64,7 +75,7 @@
   background-color: white;
   height: 110vh;
   box-shadow: 4px 4px 2.5px 0px rgba(0,0,0,0.4); 
-  width: 80%;
+  width: 75%;
 }
 
 .sheet-content {
