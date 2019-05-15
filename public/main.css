@@ -110,7 +110,7 @@
 /* /////////// TOOLBAR ////////////// */
 
 @media only screen and (max-width: 768px) {
-  .drawCanvas {
+  #drawCanvas {
     z-index: 99;
   }
   
