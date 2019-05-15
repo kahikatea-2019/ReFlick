@@ -9,6 +9,7 @@ import Toolbar from '../../Toolbar'
 import { submitGame } from '../../../api/games'
 
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './canvasSizeData'
+import { thisTypeAnnotation } from '@babel/types'
 
 class Canvas extends React.Component {
   state = {
@@ -22,7 +23,9 @@ class Canvas extends React.Component {
     frame4Img: new ImageData(CANVAS_WIDTH, CANVAS_HEIGHT),
     canvasHeight: CANVAS_HEIGHT,
     canvasWidth: CANVAS_WIDTH,
-    prevPos: [null, null]
+    prevPos: [null, null],
+    cursor: 'paint', // paint or fill
+    fill: false
   }
 
   componentDidMount () {
@@ -85,6 +88,26 @@ class Canvas extends React.Component {
     const frameImg = this.state[`frame${this.state.activeFrame}Img`]
     const { r, g, b, a } = this.state.brushColour
     this.setBackground(frameImg, r, g, b, a)
+    this.updateCanvas()
+    this.setState({
+      cursor: 'paint',
+      fill: false
+    })
+  }
+
+  fillOn = () => {
+    console.log('fillOn')
+    this.setState({
+      cursor: 'fill',
+      fill: true
+    })
+  }
+
+  fillOff = () => {
+    this.setState({
+      cursor: 'paint',
+      fill: false
+    })
   }
 
   paintPixels (imageData, xClick, yClick, isDragged) {
@@ -180,11 +203,15 @@ class Canvas extends React.Component {
   }
 
   mouseDownHandler = e => {
-    this.setState({
-      mouseDown: true
-    })
-    const { offsetX: x, offsetY: y } = e.nativeEvent
-    this.updateCanvas(x, y, false)
+    if (this.state.fill) {
+      this.fill()
+    } else {
+      this.setState({
+        mouseDown: true
+      })
+      const { offsetX: x, offsetY: y } = e.nativeEvent
+      this.updateCanvas(x, y, false)
+    }
   }
 
   mouseUpHandler = e => {
@@ -207,13 +234,20 @@ class Canvas extends React.Component {
   }
 
   render () {
-    const { canvasHeight, canvasWidth } = this.state
+    const { canvasHeight, canvasWidth, cursor } = this.state
     const { frame1Img, frame2Img, frame3Img, frame4Img } = this.state
+    let style = {}
+    if (cursor === 'paint') {
+      style = { cursor: 'crosshair' }
+    } if (cursor === 'fill') {
+      style = { cursor: `url('images/fillbucket-cursor.png'),pointer` }
+    }
     return (
       <div className="sheet">
         <div className="sheet-content">
           <div className="colLeft">
             <canvas
+              style={style}
               id="drawCanvas"
               ref="canvas"
               width={canvasWidth}
@@ -233,7 +267,7 @@ class Canvas extends React.Component {
           </div>
 
           <div className="colRight">
-            <Toolbar fill={this.fill} thumbnails={{ frame1Img, frame2Img, frame3Img, frame4Img }}/>
+            <Toolbar fillOn={this.fillOn} fillOff={this.fillOff} thumbnails={{ frame1Img, frame2Img, frame3Img, frame4Img }}/>
           </div>
         </div>
       </div>
