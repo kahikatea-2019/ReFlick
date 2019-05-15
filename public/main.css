@@ -264,7 +264,7 @@
 }
  
 /* Smaller Laptops */
-@media only screen and (max-width: 1366px) {
+@media only screen and (min-width: 1366px) {
   
  .Tools {
     padding-top: 1vh;
@@ -288,6 +288,37 @@
     height: 120vh;
   }
 }
+
+/* 1200 * 800 screen size */
+@media only screen and (min-width: 1200px) {
+  
+  body {
+    background-color: aliceblue;
+  }
+
+  .Tools {
+     padding-top: 1vh;
+     padding-bottom: 1vh;
+     padding-right: 1vw;
+     padding-left: 1vw;
+     width: 100%;
+   }
+ 
+   .colours {
+     margin-left: 165px;
+     margin-right: 5px;
+   }
+ 
+   .frames { 
+     margin-top: 13px;
+     margin-left: 20px;
+   }
+  
+   .sheet{
+     padding-right: 200px;
+     height: 95vh;
+   }
+ }
 
 /*///////// COLOURS ////////// */
 
