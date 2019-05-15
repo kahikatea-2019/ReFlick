@@ -1,4 +1,4 @@
-import Footer from '../../../client/components/page-layout/Footer'
+import Footer from '../../../../client/components/layout/Footer'
 import { shallow } from 'enzyme'
 import React from 'react'
 
@@ -16,7 +16,6 @@ describe('<Footer /> is running', () => {
     expect(wrapper).toMatchSnapshot()
   })
   it('Renders coorect text', () => {
-    expect(wrapper.find('footer').text()).toBe('About us')
+    expect(wrapper.find('footer').text()).toContain(' ABOUT REFLICK')
   })
 })
-
