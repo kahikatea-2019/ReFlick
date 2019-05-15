@@ -108,20 +108,21 @@
 
 /* /////////// TOOLBAR ////////////// */
 
-
+/* Mobile & Tablet Display */
 @media only screen and (max-width: 768px) {
   
   body {
     background-color: aliceblue;
   }
 
-  .title {
+  /* .title {
     font-size: 28px;
-  }
+  } */
   
   .sheet {
     box-shadow: none;
     z-index: -1;
+    background-color: aliceblue;
   }
 
   .sheet-content {
@@ -248,10 +249,15 @@
   }
 
   .footer {
-    opacity: 0;
-    margin-top: 25px;
+    opacity: 0px;
+    height: 0px;
+    margin-top: 0px;
     padding-top: none;
     padding-bottom: 15px;
+  }
+
+  .sheet{
+    height: 135vh;
   }
 }
 
@@ -260,6 +266,63 @@
   flex-direction: row;
   text-align: center;
 }
+ 
+/* Smaller Laptops */
+@media only screen and (min-width: 1366px) {
+  
+ .Tools {
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-right: 1vw;
+    padding-left: 1vw;
+    width: 100%;
+  }
+
+  .colours {
+    margin-left: 40px;
+    margin-right: 5px;
+  }
+
+  .frames { 
+    margin-top: 13px;
+    margin-left: 20px;
+  }
+
+  .sheet{
+    height: 120vh;
+  }
+}
+
+/* 1200 * 800 screen size */
+@media only screen and (min-width: 1200px) {
+  
+  body {
+    background-color: aliceblue;
+  }
+
+  .Tools {
+     padding-top: 1vh;
+     padding-bottom: 1vh;
+     padding-right: 1vw;
+     padding-left: 1vw;
+     width: 100%;
+   }
+ 
+   .colours {
+     margin-left: 165px;
+     margin-right: 5px;
+   }
+ 
+   .frames { 
+     margin-top: 13px;
+     margin-left: 20px;
+   }
+  
+   .sheet{
+     padding-right: 200px;
+     height: 95vh;
+   }
+ }
 
 /*///////// COLOURS ////////// */
 
