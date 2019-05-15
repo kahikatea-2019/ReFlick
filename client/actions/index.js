@@ -57,7 +57,6 @@ export const updateFrameImage = (frameId, imageData) => {
 }
 
 export const updateFrameMap = (frameId, colourId, colourMap) => {
-  console.log(frameId, colourId, colourMap)
   return {
     type: UPDATE_FRAME_MAP,
     frameId,
