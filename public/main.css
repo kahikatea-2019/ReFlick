@@ -110,6 +110,10 @@
 /* /////////// TOOLBAR ////////////// */
 
 @media only screen and (max-width: 768px) {
+  .drawCanvas {
+    z-index: 99;
+  }
+  
   body {
     background-color: aliceblue;
   }
