@@ -218,6 +218,12 @@
     display: flex;
     flex-direction: row!important;
   }
+
+  .footer {
+    margin-top: 25px;
+    padding-top: none;
+    padding-bottom: 15px;
+  }
 }
 
 .Tools {
