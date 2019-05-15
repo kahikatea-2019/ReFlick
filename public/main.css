@@ -19,7 +19,6 @@
 .title {
   font-family: 'Press Start 2P', cursive;
   font-size: 3em;
-
  }
 
  @media (min-width: 1367px) and (orientation: landscape) {
@@ -109,10 +108,8 @@
 
 /* /////////// TOOLBAR ////////////// */
 
+
 @media only screen and (max-width: 768px) {
-  #drawCanvas {
-    z-index: 99;
-  }
   
   body {
     background-color: aliceblue;
@@ -124,7 +121,7 @@
   
   .sheet {
     box-shadow: none;
-    height: 0;
+    z-index: -1;
   }
 
   .sheet-content {
@@ -143,17 +140,14 @@
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     grid-row-gap: 100px;
-    /* background-color: pink; */
     width: 100%;
   }
 
   .colours {
-    /* background-color: yellow; */
     grid-area: colours;
   }
 
   .coloursContent {
-    /* background-color: purple; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -162,7 +156,6 @@
   .frames { 
     grid-area: frames;
     margin-left: 15px;
-    /* background-color: green; */
   }
 
   .frames {
@@ -176,7 +169,6 @@
 
   .pens {
     grid-area: pens;
-    /* background-color: cyan; */
   }
 
   .colour {
@@ -236,7 +228,6 @@
   }
 
   .pens h4 { 
-    /* Removing title for pens at lower screen sizes*/
     opacity: 0;
     height: 0;
     width: 0;
@@ -406,4 +397,8 @@ a {
   height: 4rem;
   margin-bottom: 3px;
   border: 0;
+}
+
+#drawCanvas {
+  z-index: 99!important;
 }
