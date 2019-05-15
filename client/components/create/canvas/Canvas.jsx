@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-
 import { Button } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
 
@@ -23,7 +22,8 @@ class Canvas extends React.Component {
     frame4Img: new ImageData(CANVAS_WIDTH, CANVAS_HEIGHT),
     canvasHeight: CANVAS_HEIGHT,
     canvasWidth: CANVAS_WIDTH,
-    prevPos: [null, null]
+    prevPos: [null, null],
+    cursor: 'paint' // paint or fill
   }
 
   componentDidMount () {
@@ -202,12 +202,19 @@ class Canvas extends React.Component {
   }
 
   render () {
-    const { canvasHeight, canvasWidth } = this.state
+    const { canvasHeight, canvasWidth, cursor } = this.state
+    let style = {}
+    if (cursor === 'paint') {
+      style = { cursor: 'crosshair' }
+    } if (cursor === 'fill') {
+      style = { cursor: 'url(path-to-image.png)' }
+    }
     return (
       <div className="sheet">
         <div className="sheet-content">
           <div className="colLeft">
             <canvas
+              style={style}
               id="drawCanvas"
               ref="canvas"
               width={canvasWidth}
