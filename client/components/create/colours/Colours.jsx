@@ -31,10 +31,8 @@ class Colours extends React.Component {
     const { colours, frames } = this.props
     return (
       <div className="colours">
-        <h4 > Colours </h4>
-        <div className="coloursContent">
-          {this.renderColour(colours, frames)}
-        </div>
+        <h4> Colours </h4>
+        {this.renderColour(colours, frames)}
       </div>
     )
   }

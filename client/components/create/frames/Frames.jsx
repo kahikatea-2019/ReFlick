@@ -21,9 +21,7 @@ class Frames extends React.Component {
       <div className="frames-pen">
         <div className="frames">
           <h4> Frames </h4>
-          <div className="framesContent">
-            {this.renderFrames(frames, this.props.dispatch)}
-          </div>
+          {this.renderFrames(frames, this.props.dispatch)}
           <br/>
         </div>
 
