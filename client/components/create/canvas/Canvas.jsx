@@ -82,6 +82,12 @@ class Canvas extends React.Component {
     this.displayActiveFrame()
   }
 
+  fill = () => {
+    const frameImg = this.state[`frame${this.state.activeFrame}Img`]
+    const { r, g, b, a } = this.state.brushColour
+    this.setBackground(frameImg, r, g, b, a)
+  }
+
   paintPixels (imageData, xClick, yClick, isDragged) {
     const { brushSize } = this.state
     const { r, g, b, a } = this.state.brushColour
@@ -234,7 +240,7 @@ class Canvas extends React.Component {
           </div>
 
           <div className="colRight">
-            <Toolbar/>
+            <Toolbar fill={this.fill}/>
           </div>
         </div>
       </div>
